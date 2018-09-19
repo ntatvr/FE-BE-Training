@@ -6,14 +6,31 @@ var formidable = require('formidable');
 var mv = require('mv');
 var nodemailer = require('nodemailer');
 var utils = require('./utils.js');
+var mysql = require('mysql');
 
 http.createServer(function(req, res) {
     console.info('Create Server: ' + req.url);
     var q = url.parse(req.url, true);
     var filename = "." + q.pathname;
-    //console.info('URL: ', filename);
 
     switch (req.url) {
+        case '/mySQL':
+            //utils.redirect(res, 'upload.html');
+            var con = utils.createConnection(mysql);
+            con.connect((err) => {
+                if(err){
+                    console.log('Error connecting to Db');
+                    return;
+                }
+                console.log('Connection established');
+                con.query("SELECT * FROM `nodejs-training`.user", function (err, result, fields) {
+                    if (err) throw err;
+                    console.log(result[0].username);
+                });
+                con.end();
+            });
+            res.end();
+            break;
         case '/sendMail':
             var form = new formidable.IncomingForm();
             form.parse(req, function(err, fields, files) {
@@ -58,6 +75,7 @@ http.createServer(function(req, res) {
             break;
         default:
             fs.readFile('../html/' + filename, function(err, data) {
+
                 if (err) {
                     res.writeHead(404, {
                         'Content-Type': 'text/html'
