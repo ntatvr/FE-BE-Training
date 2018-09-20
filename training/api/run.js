@@ -19,14 +19,15 @@ http.createServer(function(req, res) {
             var con = utils.createConnection(mysql);
             con.connect((err) => {
                 if(err){
-                    console.log('Error connecting to Db');
+                    console.log('[ERROR] Error connecting to DB');
                     return;
                 }
                 console.log('Connection established');
-                con.query("SELECT * FROM `nodejs-training`.user", function (err, result, fields) {
+                con.query("SELECT * FROM `nodejs-training`.user WHERE isActive = ?", [1], function (err, result, fields) {
                     if (err) throw err;
-                    console.log(result[0].username);
+                    console.log(result);
                 });
+                console.info('[INFO] Close Connection!');
                 con.end();
             });
             res.end();
