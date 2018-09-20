@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{title}}</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="top-nav-bar"></div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-6">
+				{{each item in users}}
+				<form>
+					<table class="table m-5">
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>{{item.username}}</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>Jacob</td>
+								<td>Thornton</td>
+								<td>@fat</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>Larry</td>
+								<td>the Bird</td>
+								<td>@twitter</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script language="javascript" src="js/bootstrap.min.js"></script>
+	<script src="/js/app.client.js"></script>
+</body>
+</html>

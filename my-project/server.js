@@ -11,14 +11,16 @@ require('./routes')(app);
 
 // Set static content.
 app.use('/', express.static('./public'));
+app.use('/', express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use('/', express.static('./views/common'));
 
-// Set view template engine for file extension server.view.html
-app.engine('server.view.html', hbs.express4({
-  	extname: '.server.view.html'
+// Set view template engine for file extension server.view.ejs
+app.engine('server.view.ejs', hbs.express4({
+  	extname: '.server.view.ejs'
 }));
 
 // Set view engine
-app.set('view engine', 'server.view.html');
+app.set('view engine', 'server.view.ejs');
 
 // Set views folder
 app.set('views', './views');

@@ -16,7 +16,7 @@ module.exports = {
 */
 function renderHomePage(req, res) {
 	res.render('homepage', {
-	    content : 'This is homepage content'
+	    title : 'HOMEPAGE'
 	});
 }
 
@@ -30,6 +30,11 @@ function renderHomePage(req, res) {
 */
 function renderContact(req, res) {
 	res.render('contact', {
-	    content : 'This is contact page content'
+	    title : 'CONTACT',
+	    users: [{
+	    	username: 'ntatvr',
+	    	password: '123456',
+	    	isActive: 1
+	    }]
 	});
 }
