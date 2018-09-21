@@ -1,5 +1,7 @@
 const coreCtrl = require('./core.server.controller');
+const userCtrl = require('./core.server.controller.user');
 
 module.exports = {
-	Core : coreCtrl
+	CoreCtrl : coreCtrl,
+	UserCtrl: userCtrl
 }

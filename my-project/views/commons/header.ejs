@@ -8,11 +8,25 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="/">HOME</a>
+			<% if (typeof currentPage != 'undefined' && currentPage == 'home') { %>
+				<li class="nav-item active">
+			<% } else { %>
+				<li class="nav-item">
+			<% } %>
+				<a class="nav-link" href="/">Home</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/user">USER</a>
+			<% if (typeof currentPage != 'undefined' && currentPage == 'user') { %>
+				<li class="nav-item active">
+			<% } else { %>
+				<li class="nav-item">
+			<% } %>				<a class="nav-link" href="/user">User</a>
+			</li>
+			<% if (typeof currentPage != 'undefined' && currentPage == 'sendmail') { %>
+				<li class="nav-item active">
+			<% } else { %>
+				<li class="nav-item">
+			<% } %>
+				<a class="nav-link" href="/sendMail">Send Mail</a>
 			</li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">

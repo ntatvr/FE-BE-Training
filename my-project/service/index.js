@@ -1,5 +1,9 @@
-const userService = require('./core.server.service.user');
+const userModel = require('./core.server.service.user');
 
 module.exports = {
-	userService : userService
+	getAllUser : userModel.getAllUser,
+	getUserById: userModel.getUserById,
+	addUser: userModel.addUser,
+	updateUser: userModel.updateUser,
+	deleteUser: userModel.deleteUser
 }

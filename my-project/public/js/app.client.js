@@ -1,11 +1,15 @@
 $(document).ready(function(){
-    
-    // load top navigation
-    var $top_nav_bar = $('.top-nav-bar');
-    if ($top_nav_bar.length > 0) {
-    	$top_nav_bar.load('../nav-bar.html');
-    }
+    $('.btn-delete').on('click', function() {
 
+    	var $this = $(this),
+    		$form = $this.closest('form');
+    		idUser = $this.closest('tr').find('input.is-user').val()
+    		$inputIdUser = $form.find('input[name="iduser"]');
+    	$inputIdUser.val(idUser);
+    	$form.submit();
+    });
 
-    
+	$('.btn-update').on('click', function() {
+		alert("To be update");
+	});
 });

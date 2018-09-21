@@ -1,0 +1,14 @@
+<div class="error-wrapper mt-2">
+	<% if (typeof messages.addSuccessful != 'undefined' && messages.addSuccessful) { %>
+		<div class="alert alert-success" role="alert"><%= messages.addSuccessful %></div>
+	<% } %>
+	<% if (typeof messages.addFailed != 'undefined' && messages.addFailed) { %>
+		<div class="alert alert-danger" role="alert"><%= messages.addFailed %></div>
+	<% } %>
+	<% if (typeof messages.deleteSuccessful != 'undefined' && messages.deleteSuccessful) { %>
+		<div class="alert alert-success" role="alert"><%= messages.deleteSuccessful %></div>
+	<% } %>
+	<% if (typeof messages.deleteFailed != 'undefined' && messages.deleteFailed) { %>
+		<div class="alert alert-danger" role="alert"><%= messages.deleteFailed %></div>
+	<% } %>
+</div>

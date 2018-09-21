@@ -6,30 +6,78 @@
 <body>
 	<% include commons/header %>
 	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col-6">
-				<form>
-					<table class="table m-5">
+		<div class="row">
+			<div class="col-12">
+				<h1>User Management</h1>
+			</div>
+			<div class="col-4">
+				<h2>Insert User</h2>
+				<div class="col-12 mt-3">
+					<form action="user/add" method="post">
+						<div class="form-group">
+							<label for="txtUsername">Username *</label>
+								<input type="text" name="username"
+								required class="form-control" id="txtUsername" placeholder="Username">
+							</div>
+						<div class="form-group">
+							<label for="txtPassword">Password *</label>
+							<input type="password" name="password" required
+								class="form-control" id="txtPassword"
+								placeholder="Password">
+						</div>
+						<div class="form-group form-check">
+							<input name="isActive" type="checkbox"
+								class="form-check-input"
+								id="isActive">
+							<label class="form-check-label" for="chxIsActive">Is Active</label>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+					<!-- Include messages -->
+					<% include commons/messages%>
+				</div>
+			</div>
+			<div class="col-8">
+				<h2>Users</h2>
+				<div class="col-12 p-0">
+					<form action="user" method="GET" 
+						class="form-inline my-2 my-lg-0 justify-content-end">
+						<input name="iduser" class="form-control mr-sm-2" type="search" placeholder="Search user by id" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</div>
+				<form action="user/delete" method="POST">
+					<input type="hidden" name="iduser" />
+					<table class="table mt-3">
 						<thead>
 							<tr>
-								<th>No.</th>
+								<th width="5%">Id</th>
 								<th>Username</th>
 								<th>Password</th>
-								<th>Is Active</th>
+								<th width="10%">Active</th>
+								<th width="25%">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-						<% users.forEach(function(user) {%>
+							<% data.rows.forEach(function(user, index) {%>
 							<tr>
-								<td scope="row">1</td>
-								<td><%= user.username%></td>
-								<td><%= user.password%></td>
-								<td><%= user.isActive%></td>
+								<td>
+									<%= (index + 1) %>
+									<!-- <%= user.iduser %> -->
+									<input class="is-user" type="hidden" value="<%= user.iduser %>" />	
+								</td>
+								<td><%= user.username %></td>
+								<!-- <td><%= user.password %></td> -->
+								<td>******</td>
+								<td><%= user.isActive ? true : false %></td>
+								<td>
+									<button type="button" class="btn-delete btn btn-danger">Delete</button>
+									<button type="button" class="btn-update btn btn-info">Update</button>
+								</td>
 							</tr>
-						<% }); %>
+							<% }); %>
 						</tbody>
 					</table>
-
 				</form>
 			</div>
 		</div>
