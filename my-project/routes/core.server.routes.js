@@ -9,5 +9,5 @@ const coreCtrl = require('../controllers').Core;
 
 module.exports = function(app) {
 	app.route('/').get(coreCtrl.renderHomePage);
-	app.route('/contact').get(coreCtrl.renderContactPage);
+	app.route('/user').get(coreCtrl.renderUserPage);
 };

@@ -3,7 +3,7 @@
 // Module public methods.
 module.exports = {
 	renderHomePage : renderHomePage,
-	renderContactPage  : renderContact
+	renderUserPage  : renderUser
 };
 
 /**
@@ -21,20 +21,27 @@ function renderHomePage(req, res) {
 }
 
 /**
-* @name renderContact
+* @name renderUser
 * @description
-* Render contact page.
+* Render user page.
 *
 * @param  {object} req HTTP request
 * @param  {object} res HTTP response
 */
-function renderContact(req, res) {
-	res.render('contact', {
-	    title : 'CONTACT',
-	    users: [{
-	    	username: 'ntatvr',
-	    	password: '123456',
-	    	isActive: 1
-	    }]
+function renderUser(req, res) {
+	res.render('user', {
+	    title : 'USER',
+	    users: [
+		    {
+		    	username: 'ntatvr',
+		    	password: '123456',
+		    	isActive: 1
+		    },
+		    {
+		    	username: 'ntatvr',
+		    	password: '123456',
+		    	isActive: 1
+		    }
+	    ]
 	});
 }
