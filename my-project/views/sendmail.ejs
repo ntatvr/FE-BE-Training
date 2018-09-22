@@ -7,8 +7,24 @@
 	<% include commons/header %>
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
-				<h1>Send Mail</h1>
+			<div class="col-6">
+				<h1>Send mail to all users.</h1>
+				<div class="col-12 mt-3">
+					<form action="sendMail" method="post">
+						<div class="form-group">
+							<label for="txtSubject">Subject *</label>
+							<input type="text" name="subject" value="[Node.js] - Testing" 
+								required class="form-control" id="txtSubject" placeholder="Enter subject">
+							</div>
+						<div class="form-group">
+						    <label for="txtContent">Content *</label>
+						    <textarea name="content" class="form-control" id="txtContent" rows="3" required>[Node.js] - Send by Anh Nguyen.</textarea>
+						 </div>
+						<button type="submit" class="btn btn-primary">Send</button>
+					</form>
+					<!-- Include messages -->
+					<% include commons/messages%>
+				</div>
 			</div>
 		</div>
 	</div>

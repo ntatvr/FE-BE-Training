@@ -7,6 +7,7 @@
 
 const coreCtrl = require('../controllers').CoreCtrl;
 const userCtrl = require('../controllers').UserCtrl;
+const emailCtrl = require('../controllers').EmailCtrl;
 
 module.exports = function(app) {
 	// Pages
@@ -19,4 +20,6 @@ module.exports = function(app) {
 	app.route('/user/:id?').get(userCtrl.getUserById);
 	app.route('/user/add').post(userCtrl.addUser);
 	app.route('/user/delete').post(userCtrl.deleteUser);
+	
+	app.route('/sendMail').post(emailCtrl.sendMail);
 };

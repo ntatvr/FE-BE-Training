@@ -1,8 +1,10 @@
 <div class="error-wrapper mt-2">
-	<% if (typeof messages.successfulMessage != 'undefined' && messages.successfulMessage) { %>
-		<div class="alert alert-success" role="alert"><%= messages.successfulMessage %></div>
-	<% } %>
-	<% if (typeof messages.failedMessage != 'undefined' && messages.failedMessage) { %>
-		<div class="alert alert-danger" role="alert"><%= messages.failedMessage %></div>
+	<% if (typeof messages != 'undefined') { %>
+		<% if (typeof messages.successfulMessage != 'undefined' && messages.successfulMessage) { %>
+			<div class="alert alert-success" role="alert"><%= messages.successfulMessage %></div>
+		<% } %>
+		<% if (typeof messages.failedMessage != 'undefined' && messages.failedMessage) { %>
+			<div class="alert alert-danger" role="alert"><%= messages.failedMessage %></div>
+		<% } %>
 	<% } %>
 </div>

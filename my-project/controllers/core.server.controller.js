@@ -2,7 +2,6 @@
 const userService = require('../service');
 const utils = require('../utils').Utils;
 
-
 // Module public methods.
 module.exports = {
 	renderHomePage : renderHomePage,

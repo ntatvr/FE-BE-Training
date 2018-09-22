@@ -1,4 +1,4 @@
-var dbConnection = require('../dao').dbConnection;
+var dbConnection = require('../connection').dbConnection;
 
 var userModel = {
 	getAllUser: function(callback) {
