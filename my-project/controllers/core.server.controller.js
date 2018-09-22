@@ -41,9 +41,8 @@ function renderHomePage(req, res) {
 function renderUserPage(req, res) {
 
 	var currentPage;
-	console.log(req.url);
-	if (req.url === '/user') {
-		console.log(req.url);
+	console.log(req.url + ' ' + req.url.includes('/user'));
+	if (req.url === '/user' || req.url.includes('/user')) {
 		currentPage = 'user';
 	}
 

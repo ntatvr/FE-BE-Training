@@ -10,23 +10,29 @@
 		<ul class="navbar-nav mr-auto">
 			<% if (typeof currentPage != 'undefined' && currentPage == 'home') { %>
 				<li class="nav-item active">
+				<a class="nav-link font-weight-bold" href="/">Home</a>
 			<% } else { %>
 				<li class="nav-item">
-			<% } %>
 				<a class="nav-link" href="/">Home</a>
+			<% } %>
 			</li>
 			<% if (typeof currentPage != 'undefined' && currentPage == 'user') { %>
 				<li class="nav-item active">
+				<a class="nav-link font-weight-bold" href="/user">User</a>
 			<% } else { %>
 				<li class="nav-item">
-			<% } %>				<a class="nav-link" href="/user">User</a>
+				<a class="nav-link" href="/user">User</a>
+			<% } %>
+				
 			</li>
 			<% if (typeof currentPage != 'undefined' && currentPage == 'sendmail') { %>
 				<li class="nav-item active">
+				<a class="nav-link font-weight-bold" href="/sendMail">Send Mail</a>
 			<% } else { %>
 				<li class="nav-item">
-			<% } %>
 				<a class="nav-link" href="/sendMail">Send Mail</a>
+			<% } %>
+				
 			</li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">

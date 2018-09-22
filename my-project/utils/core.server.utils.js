@@ -31,9 +31,7 @@ function handleResponse(err, rows) {
 
 function getMessages(req) {
     return {
-        addSuccessful: req.flash('addSuccessful'),
-        addFailed: req.flash('addFailed'),
-        deleteFailed: req.flash('deleteFailed'),
-        deleteSuccessful: req.flash('deleteSuccessful')
+        failedMessage: req.flash('failedMessage'),
+        successfulMessage: req.flash('successfulMessage'),
     }
 }

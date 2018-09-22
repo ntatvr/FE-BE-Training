@@ -23,9 +23,9 @@ function deleteUser(req, res) {
 	userService.deleteUser(req.body.iduser, function(err, count) {
 		if(err){
 			console.log(err);
-            req.flash('deleteFailed', 'Delete Failed!');
+            req.flash('failedMessage', 'Delete Failed!');
         } else{
-        	req.flash('deleteSuccessful', 'Delete successfully!');
+        	req.flash('successfulMessage', 'Delete successfully!');
         }
         res.redirect('/user');
 	});
@@ -48,15 +48,31 @@ function addUser(req, res) {
 		req.body.isActive = true;
 	}
 
-	userService.addUser(req.body, function(err, count) {
-		if(err){
-			console.log(err);
-            req.flash('addFailed', 'Insert Failed!');
-        } else{
-        	req.flash('addSuccessful', 'Insert successfully!');
-        }
-        res.redirect('/user');
-	});
+	// console.log('iduser: ' + req.body.iduser);
+	// console.log('username: ' + req.body.username);
+	// console.log('email: ' + req.body.email);
+	// console.log('isActive: ' + req.body.isActive);
+	if (req.body.iduser == undefined || req.body.iduser == '')
+		userService.addUser(req.body, function(err, count) {
+			if(err){
+				console.log(err);
+	            req.flash('failedMessage', 'Insert Failed!');
+	        } else{
+	        	req.flash('successfulMessage', 'Insert successfully!');
+	        }
+	        res.redirect('/user');
+		});
+	else {
+		userService.updateUser(req.body, function(err, count) {
+			if(err){
+				console.log(err);
+	            req.flash('failedMessage', 'Update Failed!');
+	        } else{
+	        	req.flash('successfulMessage', 'Update successfully!');
+	        }
+	        res.redirect('/user');
+		});
+	}
 }
 
 /**
