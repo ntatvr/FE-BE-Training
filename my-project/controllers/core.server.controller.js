@@ -40,7 +40,6 @@ function renderHomePage(req, res) {
 function renderUserPage(req, res) {
 
 	var currentPage;
-	console.log(req.url + ' ' + req.url.includes('/user'));
 	if (req.url === '/user' || req.url.includes('/user')) {
 		currentPage = 'user';
 	}
@@ -83,6 +82,7 @@ function renderSendMail(req, res) {
 
 	res.render('sendmail', {
 	    title : 'SEND MAIL',
-	    currentPage: currentPage
+	    currentPage: currentPage,
+	    messages: utils.getMessages(req),
 	});
 }

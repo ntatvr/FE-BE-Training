@@ -1,3 +1,12 @@
+Function:
+- send mail
+- table CRUD
+
+- Database: MySQL
+
+- express js
+- useing ejs to render html
+
 Q: How to install nodemon?
 1. Install nodemon with this command:
 - npm install -g nodemon
