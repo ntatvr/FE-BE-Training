@@ -2,19 +2,20 @@ Function:
 - send mail
 - table CRUD
 
-- Database: MySQL
+Framework:
+- Express JS
+- using EJS template engine
 
-- express js
-- useing ejs to render html
 
-Q: How to install nodemon?
-1. Install nodemon with this command:
-- npm install -g nodemon
+Q: How to install and start nodemon?
+
+1. Install libs with this command:
+- npm install or npm install -g nodemon
 
 2. Start server with this command:
 - nodemon run start
 
-
+Database: MySQL
 // Create user table
 CREATE TABLE `nodejs-training`.`user` (
   `iduser` INT NOT NULL AUTO_INCREMENT,
