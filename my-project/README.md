@@ -1,9 +1,9 @@
-Function:
+Functions:
 - send mail
 - table CRUD
 - chatting
 
-Framework:
+Frameworks:
 - Express JS
 - using EJS template engine
 - Socket.io
