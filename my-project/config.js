@@ -20,7 +20,7 @@ config.db_password = '';
  * Email Configuration
  */
 config.email_auth_user = '12130155@st.hcmuaf.edu.vn';
-config.email_auth_pass = '01653354391';
+config.email_auth_pass = '';
 
 module.exports = config
 
