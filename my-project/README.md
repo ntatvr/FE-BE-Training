@@ -1,10 +1,12 @@
 Function:
 - send mail
 - table CRUD
+- chating
 
 Framework:
 - Express JS
 - using EJS template engine
+- Socket.io
 
 
 Q: How to install and start nodemon?
