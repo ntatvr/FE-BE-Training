@@ -1,7 +1,7 @@
 Function:
 - send mail
 - table CRUD
-- chating
+- chatting
 
 Framework:
 - Express JS
@@ -9,7 +9,7 @@ Framework:
 - Socket.io
 
 
-Q: How to install and start nodemon?
+Q: How to install and start node server?
 
 1. Install libs with this command:
 - npm install or npm install -g nodemon
