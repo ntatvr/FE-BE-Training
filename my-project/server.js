@@ -57,11 +57,37 @@ app.use(flash());
 // Do Registration routes.
 require('./routes')(app);
 
-app.listen(port, function(err) {
-  if(err) {
-    console.error('Something error !!');
-    console.error(err);
-  }
+// app.listen(port, function(err) {
+//   if(err) {
+//     console.error('Something error !!');
+//     console.error(err);
+//   }
 
-  console.log('App listen on port ' + port);
+//   console.log('App listen on port ' + port);
+// });
+
+var io = require('socket.io').listen(app.listen(port, function(err) {
+	if(err) {
+	    console.error('Something error !!');
+	    console.error(err);
+	}
+
+	console.log('App listen on port ' + port);
+}));
+
+var messages = [];
+
+io.sockets.on('connection', function (socket) {
+
+	var data = {
+    	iduser : '',
+    	message: 'Welcome to the chat application.',
+    	time: new Date()
+    }
+    messages.push(data);
+    socket.emit('message', messages);
+    socket.on('send', function (data) {
+    	messages.push(data);
+        io.sockets.emit('message', messages);
+    });
 });
