@@ -1,24 +1,89 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">No.</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{user.iduser}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.isActive}}</td>
-          </tr> 
-        </tbody>
-      </table>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-12">
+			<h1>User Management</h1>
+		</div>
+		<div class="col-4">
+			<h2>Insert User</h2>
+			<div class="col-12 mt-3">
+				<form [formGroup]="angForm" novalidate>
+					<div class="form-group">
+						<label for="txtUsername">Username *</label>
+						<input type="text" formControlName="username" required class="form-control" id="txtUsername" placeholder="Enter username">
+					</div>
+					<div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
+				        <div *ngIf="angForm.controls['username'].errors.required">
+				            Username is required.
+				        </div>
+			        </div>
+					<div class="form-group">
+						<label for="txtEmail">Email *</label>
+						<input type="email" formControlName="email" class="form-control" id="txtEmail" placeholder="Enter email">
+					</div>
+					<div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+				        <div *ngIf="angForm.controls['email'].errors.required">
+				            Email is required.
+				        </div>
+			        </div>
+					<div class="form-group form-check">
+						<input name="isActive" type="checkbox"
+						class="form-check-input"
+						id="isActive">
+						<label class="form-check-label" for="chxIsActive">Is Active</label>
+					</div>
+					<input type="hidden" name="iduser" value="" />
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				<!-- Include messages -->
+			</div>
+		</div>
+		<div class="col-8">
+			<h2>Users</h2>
+			<div class="col-12 p-0">
+					<form action="user" method="GET" 
+					class="form-inline my-2 my-lg-0 justify-content-end">
+					<input name="iduser" class="form-control mr-sm-2" type="search" placeholder="Search user by id" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+			<form action="user/delete" method="POST">
+				<input type="hidden" name="iduser" />
+				<table class="table mt-3 table-striped">
+					<thead>
+						<tr>
+							<th width="5%">No.</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th width="10%">Active</th>
+							<th width="25%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let user of users">
+							<td>
+								{{user.iduser}}
+								<input class="is-user" type="hidden" value="{{user.iduser}}" />  
+							</td>
+							<td>
+								{{user.username}}
+								<input class="username" type="hidden" value="{{user.username}}" />
+							</td>
+							<td>
+								{{user.email}}
+								<input class="email" type="hidden" value="{{user.email}}" />
+							</td>
+							<td>
+								{{user.isActive}}
+								<input class="is-active" type="hidden" value="{{user.isActive}}" /> 
+							</td>
+							<td>
+								<button type="button" class="btn-delete btn btn-danger">Delete</button>
+								<button type="button" class="btn-update btn btn-info ml-1">Update</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
 </div>

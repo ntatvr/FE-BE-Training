@@ -6,11 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 // import modules
 import { TodoComponent } from '../todo/todo.component';
+import { UserComponent } from '../components/user/user.component';
 
 const routes: Routes = [
 	// Default path
-	{path: '', redirectTo : '/todo', pathMatch:'full'},
-	{path: 'todo', component : TodoComponent}
+	{path: '', redirectTo : '/', pathMatch:'full'},
+	{path: 'todo', component : TodoComponent},
+  {path: 'user', component : UserComponent}
 ];
 
 
