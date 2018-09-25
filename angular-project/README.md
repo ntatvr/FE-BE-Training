@@ -34,7 +34,54 @@ npm install -g @angular/cli
 Step 2: Create new project with this command:
 ng new project-name
 
-Step 3: Navigation to project folder and run this command:
+Step 3: Install libs
+npm install
+
+Step 4: Navigation to project folder and run this command:
 ng serve --open
 
 Note: Server address: http://localhost:4200/, Port 4200 is default and you can change the default port at .angular-cli.json file
+
+
+## Structure
+angular-project
+
+├── src // source folder
+│   ├── app // Foler contain compoent, service, module and route files
+│   │   ├── app.component.css
+│   │   ├── app.component.html
+│   │   ├── app.component.spec.ts
+│   │   ├── app.component.ts
+│   │   └── app.module.ts
+│   ├── environments // Folder contain environment configuration files
+│   │   ├── environment.prod.ts
+│   │   └── environment.ts
+│   ├── index.html // Main page
+│   ├── main.ts
+│   ├── favicon.ico
+│   ├── polyfills.ts
+│   ├── styles.css
+│   ├── test.ts
+│   ├── tsconfig.app.json
+│   ├── tsconfig.spec.json
+│   └── typings.d.ts
+├── e2e  // end-to-end tests
+├── angular-cli.json // Angular CLI configuration
+├── karma.conf.js // Unit test
+├── package.json
+├── protractor.conf.js // Project configuration
+├── README.md
+└── tslint.json
+
+
+## Create Component
+You can create a new component with this command:
+-> ng generate component component-name
+
+Syntax used to create ngModel as below:
+-> [(ng-model)]=”model-name”
+
+
+## Create Routing
+Run this command:
+-> ng generate module app-routing --flat --module=app
