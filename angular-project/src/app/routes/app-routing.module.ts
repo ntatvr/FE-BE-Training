@@ -10,7 +10,7 @@ import { UserComponent } from '../components/user/user.component';
 
 const routes: Routes = [
 	// Default path
-	{path: '', redirectTo : '/', pathMatch:'full'},
+	{path: '', redirectTo : '/todo', pathMatch:'full'},
 	{path: 'todo', component : TodoComponent},
   {path: 'user', component : UserComponent}
 ];

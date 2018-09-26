@@ -20,6 +20,10 @@ var userModel = {
 	deleteUser: function(id, callback) {
 		var sql = 'DELETE FROM `nodejs-training`.user WHERE iduser = ?';
 		return dbConnection.query(sql, [id], callback);
+	},
+	getUserByEmail: function(email, callback) {
+		var sql = 'SELECT * FROM `nodejs-training`.user WHERE email = ?';
+		return dbConnection.query(sql, [email], callback);
 	}
 }
 

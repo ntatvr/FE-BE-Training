@@ -9,38 +9,45 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 export class UserService {
 
 	users: User[] = [];
+
 	constructor(private http: HttpClient) { }
 
 	getAllUser() {
 		var self = this;
-		if (this.users == undefined || this.users.length == 0) {
-			const uri = 'http://localhost:3000/user/getAll';
-			this.http.get(uri).subscribe(res => {
-				res.forEach(function(item, index) {
-					console.log(item);
-					let user = new User();
-					user.iduser = item.iduser;
-					user.username = item.username;
-					user.email = item.email;
-					user.isActive = item.isActive;
-					self.users.push(user);
-				});
+		const uri = 'http://localhost:3000/user/getAll';
+		this.http.get(uri).subscribe(res => {
+			res['rows'].forEach(function(item, index) {
+				// console.log(item);
+				let user = new User();
+				user.iduser = item.iduser;
+				user.username = item.username;
+				user.email = item.email;
+				user.isActive = item.isActive;
+				self.users.push(user);
 			});
-			console.log('Get data from API');
-			return self.users;
-		} else {
-			console.log('Get data from memori');
-			return self.users;
-		}
+		});
+		console.log('Get data from API');
+		return self.users;
 	}
 
 	addUser(username, email, isActive) {
-    // const uri = 'http://localhost:3000/user/add';
-    // const obj = {
-	   //  name: name,
-	   //  price: price
-    // };
-    // this.http.post(uri, obj)
-    //     .subscribe(res => console.log('Done'));
+		
+		// console.log('username: {}', username);
+		// console.log('email: {}', email);
+		// console.log('isActive: {}', isActive);
+
+		const uri = 'http://localhost:3000/user/insert';
+		const user = {
+			username: username,
+			email: email,
+			isActive: isActive
+		};
+
+		return this.http.post(uri, user);
+	}
+
+	deleteUser(iduser) {
+		const uri = 'http://localhost:3000/user/remove/' + iduser;
+		return this.http.get(uri);
 	}
 }

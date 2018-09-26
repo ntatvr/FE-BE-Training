@@ -5,5 +5,6 @@ module.exports = {
 	getUserById: userModel.getUserById,
 	addUser: userModel.addUser,
 	updateUser: userModel.updateUser,
-	deleteUser: userModel.deleteUser
+	deleteUser: userModel.deleteUser,
+	getUserByEmail: userModel.getUserByEmail
 }

@@ -14,6 +14,10 @@ export class UserComponent implements OnInit {
 
 	title: string;
 	angForm: FormGroup;
+	isSuccess: boolean;
+	message: string;
+	defaultUsername: string;
+
 	fakeUsers: User[] = [
 		{
 			iduser : 1,
@@ -41,8 +45,47 @@ export class UserComponent implements OnInit {
 	}
 
 	addUser(username, email, isActive) {
-      	this.userService.addUser(username, email, isActive);
+		var self = this;
+      	self.userService.addUser(username, email, isActive).subscribe(res => {
+      		if (res['status'] === "Fail") {
+      			self.isSuccess = false;
+      			this.message = res['message'];
+      		} else {
+      			self.isSuccess = true;
+      			self.message = "Insert Successful!";
+
+      			let user = new User();
+				user.iduser = res['rows'][0].iduser;
+				user.username = res['rows'][0].username;
+				user.email = res['rows'][0].email;
+				user.isActive = res['rows'][0].isActive;
+      			self.users.push(user);
+      		}
+      	});
   	}
+
+  	deleteUser(iduser) {
+  		if(confirm("Do you really want to do this?")) {
+			var self = this;
+			self.userService.deleteUser(iduser).subscribe(res => {
+				if (res['status'] === "Fail") {
+	      			self.isSuccess = false;
+	      			this.message = res['message'];
+	      		} else {
+	      			self.isSuccess = true;
+	      			self.message = "Delete Successful!";
+
+	      			// remove user
+	      			const user = self.users.find(user => user.iduser === iduser);
+	      			self.users.splice(self.users.indexOf(user));
+	      		}
+			});
+		}
+	}
+
+	updateUser(iduser) {
+		alert("To Be Updated!");
+	}
 
   	getAllUser() {
   		return this.userService.getAllUser();
@@ -51,6 +94,7 @@ export class UserComponent implements OnInit {
 	ngOnInit() {
 		this.users = this.getAllUser();
 		this.title = "USER";
+		this.defaultUsername = "xyz";
 	}
 
 }

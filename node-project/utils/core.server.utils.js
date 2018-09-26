@@ -14,22 +14,25 @@ module.exports = {
 * @param  {object} rows JDBC Result
 */
 function renderJSON(err, res, rows) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+    var status = 'Success', temp = rows;
 	if(err) {
-        res.json(err);
-    } else {
-        res.json(rows);
+        status = 'Fail';
     }
+
+    res.json({
+        status: status,
+        rows: temp
+    });
 }
 
 function handleResponse(err, rows) {
-	var status = 'Success';
+	var status = 'Success',
+        temp = rows;
 	if(err) {
         status = 'Error';
+        temp = [];
     }
-    return {status: status, rows: rows };
+    return {status: status, rows: temp };
 }
 
 function getMessages(req) {

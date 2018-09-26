@@ -28,3 +28,9 @@ CREATE TABLE `nodejs-training`.`user` (
 
 ALTER TABLE `nodejs-training`.`user` 
 CHANGE COLUMN `name` `username` VARCHAR(45) NOT NULL ;
+
+
+## Note
+[nodemon] Internal watch failed: ENOSPC: no space left on device
+To solve it: I just run the following command:
+echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p

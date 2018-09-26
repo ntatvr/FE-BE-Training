@@ -20,6 +20,8 @@ module.exports = function(app) {
 	app.route('/user/:id?').get(userCtrl.getUserById);
 	app.route('/user/add').post(userCtrl.addUser);
 	app.route('/user/delete').post(userCtrl.deleteUser);
+	app.route('/user/insert').post(userCtrl.insertUser);
+	app.route('/user/remove/:id?').get(userCtrl.removeUser);
 	
 	app.route('/sendMail').post(emailCtrl.sendMail);
 };
