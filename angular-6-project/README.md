@@ -85,3 +85,7 @@ Syntax used to create ngModel as below:
 ## Create Routing
 Run this command:
 -> ng generate module app-routing --flat --module=app
+
+##
+- ActivitiedRoute:
+- BehaviorSubject: rxjs/BehaviorSubject: share data between 2 components
