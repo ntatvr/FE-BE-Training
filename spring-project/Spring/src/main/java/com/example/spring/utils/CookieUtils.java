@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * The Class CookieUtils used to define method related to Cookie.
+ * The Class CookieUtils is used to determine method related to Cookie.
  * 
  * @author AnhNT
  */
@@ -35,7 +35,7 @@ public class CookieUtils {
 
 	
 	/**
-	 * Removes the cookie.
+	 * Removes the cookie by key.
 	 * 
 	 * To delete a cookie, we need to create a cookie that have the same name
 	 * with the cookie that we want to delete. We also need to set the max age
