@@ -1,0 +1,5 @@
+package dataaccessobject;
+
+public class StudentDaoImpl {
+
+}

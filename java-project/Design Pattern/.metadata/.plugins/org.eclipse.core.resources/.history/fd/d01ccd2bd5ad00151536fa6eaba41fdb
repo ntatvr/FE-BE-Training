@@ -1,0 +1,46 @@
+package dataaccessobject;
+
+import java.util.List;
+
+public class StudentDaoImpl implements StudentDao{
+
+	private List<Student> list;
+	
+	
+	
+	public StudentDaoImpl() {
+		super();
+		Student st1 = new Student("Nguyen Tuan Anh", 1);
+	}
+
+	@Override
+	public List<Student> getAllStudents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateStudent(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteStudent(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Student getStudent(int rollNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

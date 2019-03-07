@@ -1,0 +1,9 @@
+package dataaccessobject;
+
+public class StudentDemo {
+	public static void main(String[] args) {
+		StudentDao studentDao = new StudentDaoImpl();
+		
+		System.out.println(studentDao.getAllStudents());
+	}
+}
