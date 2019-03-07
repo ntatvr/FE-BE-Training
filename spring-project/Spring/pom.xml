@@ -98,7 +98,7 @@
 	</dependencies>
 	<build>
 		<finalName>Spring</finalName>
-		<!-- To use the plugin goals in your POM or parent POM -->
+		<!-- To use the plugin goals in your POM or parent POM XX-->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
