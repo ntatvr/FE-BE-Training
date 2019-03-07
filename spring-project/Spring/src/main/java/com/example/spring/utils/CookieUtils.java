@@ -35,7 +35,7 @@ public class CookieUtils {
 
 	
 	/**
-	 * Removes the cookie.
+	 * Removes the cookie by key.
 	 * 
 	 * To delete a cookie, we need to create a cookie that have the same name
 	 * with the cookie that we want to delete. We also need to set the max age
