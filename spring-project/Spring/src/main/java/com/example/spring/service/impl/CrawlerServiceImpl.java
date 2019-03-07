@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.example.spring.service.CrawlerService;
 
 /**
- * https://jsoup.org
+ * Crawler Service is used to determine some methods to crawler from the specific web sites.
+ * 
+ * Library: https://jsoup.org
  * 
  * @author AnhNT
  *
@@ -32,7 +34,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 
 		// Use the abs: attribute prefix to resolve an absolute URL from an attribute
 		linksOnPage.forEach(link -> pageLinks.add(link.attr("abs:href")));
-		
+
 		return pageLinks;
 	}
 
