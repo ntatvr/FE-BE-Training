@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * The Class CookieUtils used to define method related to Cookie.
+ * The Class CookieUtils is used to determine method related to Cookie.
  * 
  * @author AnhNT
  */
