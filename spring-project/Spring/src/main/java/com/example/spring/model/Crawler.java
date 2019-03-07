@@ -3,11 +3,20 @@ package com.example.spring.model;
 import java.io.Serializable;
 import java.util.HashSet;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The Class Crawler.
  */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Crawler implements Serializable {
 
@@ -18,13 +27,6 @@ public class Crawler implements Serializable {
 	private HashSet<String> hashSet;
 
 	/**
-	 * @param hashSet
-	 */
-	public Crawler() {
-		super();
-	}
-
-	/**
 	 * Instantiates a new crawler.
 	 *
 	 * @param hashSet the {@link HashSet}
@@ -33,24 +35,4 @@ public class Crawler implements Serializable {
 		super();
 		this.hashSet = hashSet;
 	}
-
-	/**
-	 * Gets the hash set.
-	 *
-	 * @return the hash set
-	 */
-	public HashSet<String> getHashSet() {
-		return hashSet;
-	}
-
-	/**
-	 * Sets the hash set.
-	 *
-	 * @param hashSet
-	 *            the new hash set
-	 */
-	public void setHashSet(HashSet<String> hashSet) {
-		this.hashSet = hashSet;
-	}
-
 }

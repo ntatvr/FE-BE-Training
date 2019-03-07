@@ -63,6 +63,14 @@
 			<version>1.10.2</version>
 		</dependency>
 
+		<!-- Lombok Project -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Jackson JSON Mapper -->
 		<!-- Json -->
 		<dependency>
