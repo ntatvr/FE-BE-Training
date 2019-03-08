@@ -43,6 +43,7 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
+		<!-- javax.servlet and javax.servlet.jsp -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -85,7 +86,6 @@
 		</dependency>
 
 		<!-- Jackson JSON Mapper -->
-		<!-- Json -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
