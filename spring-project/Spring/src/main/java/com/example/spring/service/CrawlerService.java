@@ -9,9 +9,10 @@ public interface CrawlerService {
 	/**
 	 * Gets the page links.
 	 *
-	 * @param url the url
+	 * @param url the URL
+	 * @param query the html query
 	 * @return the page links
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	HashSet<String> getPageLinks(String url)  throws IOException ;
+  HashSet<String> getPageLinks(String url, String query)  throws IOException ;
 }

@@ -2,12 +2,10 @@ package com.example.spring.service.impl;
 
 import java.io.IOException;
 import java.util.HashSet;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-
 import com.example.spring.service.CrawlerService;
 
 /**
@@ -21,21 +19,21 @@ import com.example.spring.service.CrawlerService;
 @Service(value = "CrawlerService")
 public class CrawlerServiceImpl implements CrawlerService {
 
-	@Override
-	public HashSet<String> getPageLinks(String url) throws IOException {
+  @Override
+  public HashSet<String> getPageLinks(String url, String query) throws IOException {
 
-		HashSet<String> pageLinks = new HashSet<String>();
+    HashSet<String> pageLinks = new HashSet<String>();
 
-		// 1. Fetch the HTML code
-		Document document = Jsoup.connect(url).get();
+    // 1. Fetch the HTML code
+    Document document = Jsoup.connect(url).get();
 
-		// 3. Parse the HTML to extract links to other URLs
-		Elements linksOnPage = document.select("a[href]");
+    // 3. Parse the HTML to extract links to other URLs
+    Elements linksOnPage = document.select(query);
 
-		// Use the abs: attribute prefix to resolve an absolute URL from an attribute
-		linksOnPage.forEach(link -> pageLinks.add(link.attr("abs:href")));
+    // Use the abs: attribute prefix to resolve an absolute URL from an attribute
+    linksOnPage.forEach(link -> pageLinks.add(link.attr("abs:href")));
 
-		return pageLinks;
-	}
+    return pageLinks;
+  }
 
 }
