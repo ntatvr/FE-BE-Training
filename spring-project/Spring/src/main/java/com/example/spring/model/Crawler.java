@@ -22,7 +22,6 @@ public class Crawler implements Serializable {
   private static final long serialVersionUID = 2590185890978563588L;
 
   /** The hash set. */
-  @SuppressWarnings("unused")
   private HashSet<String> hashSet;
 
   /**

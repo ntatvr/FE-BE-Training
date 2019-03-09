@@ -20,18 +20,17 @@ import com.example.spring.service.CrawlerService;
 public class CrawlerServiceImpl implements CrawlerService {
 
   @Override
-  public HashSet<String> getPageLinks(String url, String query) throws IOException {
+  public HashSet<String> getNews(String url) throws IOException {
 
     HashSet<String> pageLinks = new HashSet<String>();
-
-    // 1. Fetch the HTML code
     Document document = Jsoup.connect(url).get();
-
-    // 3. Parse the HTML to extract links to other URLs
-    Elements linksOnPage = document.select(query);
+    Elements news = document.select(".ctn_mainCates_sb").select(".titleTypPost");
 
     // Use the abs: attribute prefix to resolve an absolute URL from an attribute
-    linksOnPage.forEach(link -> pageLinks.add(link.attr("abs:href")));
+    news.forEach(item -> {
+      Elements links = item.select("a[href]");
+      links.forEach(link -> pageLinks.add(link.children().html()));
+    });
 
     return pageLinks;
   }

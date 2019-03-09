@@ -31,10 +31,10 @@ public class CrawlerController {
    * @return the page links
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  @RequestMapping(value = "/crawler", method = RequestMethod.GET,
+  @RequestMapping(value = "/crawler/getNews", method = RequestMethod.GET,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public @ResponseBody Crawler getPageLinks(@RequestParam("query") String query,
-      HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public @ResponseBody Crawler getPageLinks(HttpServletRequest request,
+      HttpServletResponse response) throws IOException {
 
     LOGGER.debug("Call API /crawler");
     try {
@@ -43,6 +43,6 @@ public class CrawlerController {
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
     }
-    return new Crawler(crawlerService.getPageLinks("https://www.webtretho.com/forum/f26/", query));
+    return new Crawler(crawlerService.getNews("https://www.webtretho.com/forum/f26/"));
   }
 }
