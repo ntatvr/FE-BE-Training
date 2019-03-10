@@ -18,7 +18,7 @@
 		<jdk.version>1.8</jdk.version>
 		<mysql.version>8.0.13</mysql.version>
 		<hibernate.version>5.2.12.Final</hibernate.version>
-		<war.plugin.version>2.4</war.plugin.version>
+		<!-- <war.plugin.version>2.4</war.plugin.version> -->
 	</properties>
 
 	<dependencies>
@@ -207,31 +207,6 @@
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${war.plugin.version}</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-						</manifest>
-					</archive>
-					<webResources>
-						<resource>
-							<filtering>true</filtering>
-							<directory>src/main/webapp</directory>
-							<includes>
-								<include>**/web.xml</include>
-							</includes>
-						</resource>
-					</webResources>
 				</configuration>
 			</plugin>
 		</plugins>
