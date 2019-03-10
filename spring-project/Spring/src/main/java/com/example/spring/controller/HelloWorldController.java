@@ -1,20 +1,20 @@
 package com.example.spring.controller;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Class HelloWorldController.
  * 
  * Used to define a controller.
  */
+@Slf4j
 @Controller
 public class HelloWorldController {
-
-	private static final Logger LOGGER = Logger.getLogger(HelloWorldController.class);
 
 	String message = "Welcome to Spring MVC!";
 
@@ -28,7 +28,7 @@ public class HelloWorldController {
 	public ModelAndView showMessage(
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
 
-		LOGGER.debug("Call API /hello");
+		log.debug("Call API /hello");
 		ModelAndView modelAndView = new ModelAndView("helloworld");
 		modelAndView.addObject("message", message);
 		modelAndView.addObject("name", name);

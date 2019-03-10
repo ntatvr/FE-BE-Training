@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.spring.model.Crawler;
 import com.example.spring.service.CrawlerService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class CrawlerController {
-
-  private static final Logger LOGGER = Logger.getLogger(CrawlerController.class);
 
   @Autowired
   private CrawlerService crawlerService;
@@ -35,7 +35,7 @@ public class CrawlerController {
   public @ResponseBody Crawler getPageLinks(HttpServletRequest request,
       HttpServletResponse response) throws IOException {
 
-    LOGGER.debug("Call API /crawler");
+    log.debug("Call API /crawler");
     try {
       request.setCharacterEncoding("utf-8");
       response.setCharacterEncoding("utf-8");
