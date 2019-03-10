@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "customer")
+@Entity
+@Table(name = "customer")
 public class Customer implements IEntity {
 
   private static final long serialVersionUID = -1910468634969245768L;
