@@ -4,7 +4,10 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class DataNotFoundException extends RuntimeException {
-    public DataNotFoundException(Throwable e) {
-        super(e);
-    }
+
+  private static final long serialVersionUID = 1556587568709120812L;
+
+  public DataNotFoundException(Throwable e) {
+    super(e);
+  }
 }
