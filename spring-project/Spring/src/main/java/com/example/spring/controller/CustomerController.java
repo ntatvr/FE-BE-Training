@@ -14,7 +14,7 @@ import com.example.spring.service.EntityService;
 public class CustomerController {
 
   @Autowired
-  private EntityService<Customer> entityService;
+  private EntityService entityService;
 
   @GetMapping("/load/{id}")
   @ResponseBody

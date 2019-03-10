@@ -1,6 +1,5 @@
 package com.example.spring.entities;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity(name = "customer")
-public class Customer implements Serializable {
+public class Customer implements IEntity {
 
   private static final long serialVersionUID = -1910468634969245768L;
 

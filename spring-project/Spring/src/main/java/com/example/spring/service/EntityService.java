@@ -1,6 +1,9 @@
 package com.example.spring.service;
 
-public interface EntityService<T> {
+import java.io.Serializable;
+import com.example.spring.entities.Customer;
 
-  T load(Object id);
+public interface EntityService {
+
+  Customer load(Object id);
 }
