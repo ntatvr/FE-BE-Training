@@ -1,14 +1,13 @@
 package com.example.spring.dao.impl;
 
-import java.io.Serializable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.spring.dao.AbstractGenericDAO;
-import com.example.spring.dao.EntityDao;
+import com.example.spring.dao.CustomerDao;
+import com.example.spring.dao.generic.AbstractGenericDAO;
 import com.example.spring.entities.Customer;
 
-@Repository
+@Repository(value = "customerDao")
 @Transactional(rollbackFor = Exception.class)
-public class EmtityDaoImpl extends AbstractGenericDAO<Customer> implements EntityDao {
+public class CustomerDaoImpl extends AbstractGenericDAO<Customer> implements CustomerDao {
 
 }

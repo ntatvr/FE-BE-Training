@@ -7,19 +7,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.spring.entities.Customer;
-import com.example.spring.service.EntityService;
+import com.example.spring.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
   @Autowired
-  private EntityService entityService;
+  private CustomerService customerService;
 
+  /**
+   * Load customer by id
+   *
+   * @param id the id of customer
+   * @return the customer
+   */
   @GetMapping("/load/{id}")
   @ResponseBody
-  public Customer loadCustomer(@PathVariable("id") Integer id) {
-    return entityService.load(id);
+  public Customer loadCustomer(@PathVariable("id") String id) {
+    return customerService.load(id);
   }
 
 }
