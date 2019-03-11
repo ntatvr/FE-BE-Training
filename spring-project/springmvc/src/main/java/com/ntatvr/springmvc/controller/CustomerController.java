@@ -24,7 +24,8 @@ import io.swagger.annotations.ApiResponses;
  * @author AnhNT
  *
  */
-@Api("REST APIs related to Customer Entity!!!!")
+@Api(value = "CustomerController", description = "REST APIs related to Customer Entity!!!!",
+    tags = "customer-controller")
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
@@ -51,8 +52,8 @@ public class CustomerController {
    * @return the list of customers
    * @throws DataNotFoundException the data not found exception
    */
-  @ApiOperation(value = "Get list of Customers in the System ", response = Iterable.class,
-      tags = "loadCustomers")
+  @ApiOperation(value = "Get list of Customers in the System ", response = Customer.class,
+      responseContainer = "List", tags = "customer-controller")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success|OK"),
       @ApiResponse(code = 401, message = "Not authorized!"),
