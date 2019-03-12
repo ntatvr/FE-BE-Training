@@ -12,22 +12,22 @@ I'm trying to implement a spring mvc project that contains the following technol
 ## Structure
 angular-project
 
-├── src // source folder
-│   ├── main 
-│   │   ├── java
-│	│	│	├── com.ntatvr.springmvc
-│   │   │   │   ├── config
-│   │   │   │   ├── controller
-│   │   │   │   ├── entity
-│   │   │   │   ├── exception
-│   │   │   │   ├── repository
-│   │   │   │   ├── service
-│   │   │   │   ├── utils
-│   │   ├── resource
-│	│	│	├── db.sql
-│	│	│	├── hibernate.properties
-│	│	│	├── jdbc.properties
-│   │   ├── webapp
-│	│	│	├── WEB-INF // Folter contain jsp files
-│	│	│	├── index.jsp // Home page
-├── pom.xml
+├── src // source folder                                                                                                                   
+│   ├── main                                                                                                                               
+│   │   ├── java                                                                                                                           
+│	  │	  │	  ├── com.ntatvr.springmvc                                                                                                       
+│   │   │   │   ├── config                                                                                                                 
+│   │   │   │   ├── controller                                                                                                             
+│   │   │   │   ├── entity                                                                                                                 
+│   │   │   │   ├── exception                                                                                                             
+│   │   │   │   ├── repository                                                                                                             
+│   │   │   │   ├── service                                                                                                               
+│   │   │   │   ├── utils                                                                                                                 
+│   │   ├── resource                                                                                                                       
+│	  │  	│  	├── db.sql                                                                                                                     
+│	  │	  │	  ├── hibernate.properties                                                                                                       
+│	  │	  │	  ├── jdbc.properties                                                                                                           
+│   │   ├── webapp                                                                                                                         
+│	  │	  │	  ├── WEB-INF // Folter contain jsp files                                                                                       
+│	  │	  │  	├── index.jsp // Home page                                                                                                     
+├── pom.xml                                                                                                                               
