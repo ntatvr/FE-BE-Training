@@ -1,7 +1,6 @@
 package com.ntatvr.springmvc.controller;
 
 import java.util.List;
-import javax.persistence.EntityNotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * [@Api] – We can add this Annotation to the controller to add basic information regarding the
@@ -30,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author AnhNT
  *
  */
-@Slf4j
 @Api(value = "CustomerController", description = "REST APIs related to Customer Entity!",
     tags = "customer-controller")
 @Controller
