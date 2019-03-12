@@ -7,9 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.Proxy;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * [@ApiModelProperty] This annotation is used in the Model property to add some description to the
@@ -20,8 +24,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "customer")
+@Proxy(lazy = false)
+@JsonIgnoreProperties
 public class Customer implements Serializable {
 
   private static final long serialVersionUID = -1910468634969245768L;
