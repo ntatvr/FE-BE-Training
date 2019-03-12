@@ -5,3 +5,4 @@ CREATE TABLE `spring-mvc`.`customer` (
   `address` VARCHAR(255) NULL,
   PRIMARY KEY (`id`));
 INSERT INTO `spring-mvc`.`customer` (`id`, `name`, `address`) VALUES ('1', 'Nguyen Tuan Anh', 'Bien Hoa');
+INSERT INTO `spring-mvc`.`customer` (`id`, `name`, `address`) VALUES ('2', 'Lam Thanh Bao Hoan', 'Tp.HCM');
