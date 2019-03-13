@@ -3,6 +3,7 @@ package com.ntatvr.springmvc.controller;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,6 @@ import com.ntatvr.springmvc.controller.model.StatusResponse;
 import com.ntatvr.springmvc.entity.Customer;
 import com.ntatvr.springmvc.service.CustomerService;
 import com.ntatvr.springmvc.utils.Constants;
-import com.ntatvr.springmvc.utils.Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -53,13 +53,13 @@ public class CustomerController {
 
     try {
       Customer customer = customerService.get(id);
-      response.setStatus(Status.SUCCESS.getStatus());
+      response.setStatus(HttpStatus.OK.value());
       response.setData(customer);
     } catch (Exception e) {
       e.printStackTrace();
-      response.setStatus(Status.INTERNAL_SERVER_ERROR.getStatus());
+      response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
       if (StringUtils.contains(e.getMessage(), "EntityNotFoundException")) {
-        response.setStatus(Status.NOT_FOUND.getStatus());
+        response.setStatus(HttpStatus.NOT_FOUND.value());
       }
       response.setData(e.getMessage());
     }
@@ -82,11 +82,11 @@ public class CustomerController {
 
     try {
       customerService.delete(id);
-      response.setStatus(Status.SUCCESS.getStatus());
+      response.setStatus(HttpStatus.OK.value());
       response.setData(String.format(Constants.MESSAGE_DELETE_SUCCESSFUL, id));
     } catch (Exception e) {
       e.printStackTrace();
-      response.setStatus(Status.INTERNAL_SERVER_ERROR.getStatus());
+      response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
       response.setData(e.getMessage());
     }
 
@@ -113,11 +113,11 @@ public class CustomerController {
 
     try {
       List<Customer> list = customerService.getAll();
-      response.setStatus(Status.SUCCESS.getStatus());
+      response.setStatus(HttpStatus.OK.value());
       response.setData(list);
     } catch (Exception e) {
       e.printStackTrace();
-      response.setStatus(Status.INTERNAL_SERVER_ERROR.getStatus());
+      response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
       response.setData(e.getMessage());
     }
 
