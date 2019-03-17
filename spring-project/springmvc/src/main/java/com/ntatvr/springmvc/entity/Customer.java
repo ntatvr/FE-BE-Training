@@ -7,8 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.annotations.Proxy;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,24 +32,98 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 @Proxy(lazy = false)
-@JsonIgnoreProperties
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(Include.NON_NULL)
 public class Customer implements Serializable {
 
   private static final long serialVersionUID = -1910468634969245768L;
 
-  @ApiModelProperty(notes = "Identity id of the Customer", name = "id", required = true)
+  @ApiModelProperty(notes = "Identity id of the Customer", name = "customerNumber", required = true)
   @Id
-  @Column(name = "id")
+  @NotNull
+  @Size(max = 11)
+  @Column(name = "customerNumber")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  @JsonProperty("customer_number")
+  private Integer customerNumber;
 
-  @ApiModelProperty(notes = "Name of the Customer", name = "name", required = false)
-  @Column(name = "name")
-  private String name;
+  @ApiModelProperty(notes = "Full name of the Customer", name = "customerName", required = true)
+  @NotNull
+  @Size(max = 50)
+  @Column(name = "customerName")
+  @JsonProperty("customer_name")
+  private String customerName;
 
-  @ApiModelProperty(notes = "Address of the Customer", name = "address", required = false)
-  @Column(name = "address")
-  private String address;
+  @ApiModelProperty(name = "contactLastName", required = true)
+  @NotNull
+  @Column(name = "contactLastName")
+  @JsonProperty("contact_last_name")
+  private String contactLastName;
+
+  @ApiModelProperty(name = "contactFirstName", required = true)
+  @NotNull
+  @Size(max = 50)
+  @Column(name = "contactFirstName")
+  @JsonProperty("contact_first_name")
+  private String contactFirstName;
+
+  @JsonProperty("phone")
+  @ApiModelProperty(name = "phone", required = true)
+  @NotNull
+  @Size(max = 50)
+  @Column(name = "phone")
+  private String phone;
+
+  @JsonProperty("address_line_1")
+  @ApiModelProperty(name = "addressLine1", required = true)
+  @NotNull
+  @Size(max = 50)
+  @Column(name = "addressLine1")
+  private String addressLine1;
+
+  @JsonProperty("address_line_2")
+  @ApiModelProperty(name = "addressLine2", required = false)
+  @Size(max = 50)
+  @Column(name = "addressLine2")
+  private String addressLine2;
+
+  @JsonProperty("city")
+  @ApiModelProperty(name = "city", required = true)
+  @NotNull
+  @Size(max = 50)
+  @Column(name = "city")
+  private String city;
+
+  @JsonProperty("state")
+  @ApiModelProperty(name = "state", required = false)
+  @Size(max = 50)
+  @Column(name = "state")
+  private String state;
+
+  @JsonProperty("postal_code")
+  @ApiModelProperty(name = "postalCode", required = false)
+  @Size(max = 15)
+  @Column(name = "postalCode")
+  private String postalCode;
+
+  @JsonProperty("country")
+  @ApiModelProperty(name = "country", required = true)
+  @NotNull
+  @Size(max = 50)
+  @Column(name = "country")
+  private String country;
+
+  @JsonProperty("sales_rep_employee_number")
+  @ApiModelProperty(name = "salesRepEmployeeNumber", required = false)
+  @Size(max = 11)
+  @Column(name = "salesRepEmployeeNumber")
+  private Integer salesRepEmployeeNumber;
+
+  @JsonProperty("credit_limit")
+  @ApiModelProperty(name = "creditLimit", required = false)
+  @Size(max = 50)
+  @Column(name = "creditLimit")
+  private Double creditLimit;
 }

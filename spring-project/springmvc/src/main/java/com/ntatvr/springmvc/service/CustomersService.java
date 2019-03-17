@@ -1,9 +1,12 @@
 package com.ntatvr.springmvc.service;
 
+import java.util.List;
 import com.ntatvr.springmvc.entity.Customer;
 
 /**
  * The Interface CustomerService.
  */
-public interface CustomerService extends GenericService<Customer> {
+public interface CustomersService extends GenericService<Customer> {
+
+  List<Customer> excuteQuery();
 }
