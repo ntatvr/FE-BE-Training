@@ -50,7 +50,8 @@ public abstract class RESTController<T, ID extends Serializable> {
       @ApiResponse(code = 404, message = "Not found!!!")})
   @GetMapping()
   @ResponseBody
-  public ResponseEntity<Object> findAll(@RequestParam Integer limit, @RequestParam Integer page) {
+  public ResponseEntity<Object> findAll(@RequestParam(required = false) Integer limit,
+      @RequestParam(required = false) Integer page) {
 
     if (!Objects.nonNull(limit)) {
       limit = 10;

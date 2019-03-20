@@ -18,9 +18,11 @@
 <body class="container">
 	<div class="col-md-12">
 		<h1>This is News site!</h1>
-		<br/>
-		<h2>Page number 1</h2>
-		<br/>
+		<a href="/springmvc">Back to Home!</a>
+		<h2>Page number ${currentPage}</h2>
+		<c:forEach begin="1" end="${totalPage}" varStatus="loop">
+			<a href="./news?page=${loop.index}">${loop.index}</a>
+		</c:forEach>
 	</div>
 	<table class="col-md-12 table table-striped">
 		<thead>
@@ -45,7 +47,7 @@
 								true
 							</c:when>
 							<c:otherwise>
-								false
+								<span class="text-danger">false</span>
 							</c:otherwise>
 						</c:choose>
 					</td>

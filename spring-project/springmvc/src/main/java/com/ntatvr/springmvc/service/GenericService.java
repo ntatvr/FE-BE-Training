@@ -5,17 +5,19 @@ import java.util.Optional;
 
 public interface GenericService<T> {
 
-  public List<T> findAll();
+  List<T> findAll();
 
-  public List<T> findAll(Integer limit, Integer page);
+  List<T> findAll(Integer limit, Integer page);
 
-  public void save(T theObject);
+  void save(T theObject);
 
-  public T getOne(Integer theId);
+  T getOne(Integer theId);
 
-  public Optional<T> findById(Integer theId);
+  Optional<T> findById(Integer theId);
 
-  public void deleteById(Integer theId);
-  
-  public void deleteAll();
+  void deleteById(Integer theId);
+
+  void deleteAll();
+
+  long count();
 }
