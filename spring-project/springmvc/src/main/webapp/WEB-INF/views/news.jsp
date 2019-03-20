@@ -19,10 +19,17 @@
 	<div class="col-md-12">
 		<h1>This is News site!</h1>
 		<a href="/springmvc">Back to Home!</a>
-		<h2>Page number ${currentPage}</h2>
-		<c:forEach begin="1" end="${totalPage}" varStatus="loop">
-			<a href="./news?page=${loop.index}">${loop.index}</a>
-		</c:forEach>
+		<h5>Current Page ${currentPage}</h5>
+		<p> <span>Pageing: </span>
+			<c:forEach begin="1" end="${totalPage}" varStatus="loop">
+				<c:if test="${loop.index == currentPage}">
+					<a class="text-danger bg-warning p-1" href="./news?page=${loop.index}">${loop.index}</a>
+				</c:if>
+				<c:if test="${loop.index != currentPage}">
+					<a class="bg-light p-1" href="./news?page=${loop.index}">${loop.index}</a>
+				</c:if>
+			</c:forEach>
+		</p>
 	</div>
 	<table class="col-md-12 table table-striped">
 		<thead>
