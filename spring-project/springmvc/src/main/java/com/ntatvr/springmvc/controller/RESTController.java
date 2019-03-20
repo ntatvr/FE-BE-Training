@@ -1,14 +1,18 @@
 package com.ntatvr.springmvc.controller;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ntatvr.springmvc.exception.ApiData;
 import com.ntatvr.springmvc.exception.ApiMessage;
@@ -44,12 +48,22 @@ public abstract class RESTController<T, ID extends Serializable> {
       @ApiResponse(code = 401, message = "Not authorized!"),
       @ApiResponse(code = 403, message = "Forbidden!!!"),
       @ApiResponse(code = 404, message = "Not found!!!")})
-  @GetMapping
+  @GetMapping()
   @ResponseBody
-  public ResponseEntity<Object> findAll() {
+  public ResponseEntity<Object> findAll(@RequestParam Integer limit, @RequestParam Integer page) {
 
-    List<T> list = this.getRepository().findAll();
-    return new ResponseEntity<>(new ApiData(list.size(), list), HttpStatus.OK);
+    if (!Objects.nonNull(limit)) {
+      limit = 10;
+    }
+
+    if (!Objects.nonNull(page)) {
+      page = 0;
+    }
+
+    Pageable pageable = PageRequest.of(page, limit);
+    Page<T> pages = this.getRepository().findAll(pageable);
+    return new ResponseEntity<>(new ApiData(pages.getContent().size(), pages.getContent()),
+        HttpStatus.OK);
   }
 
   /**
