@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.hibernate.hql.internal.ast.QuerySyntaxException;
+import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,8 @@ public class GlobalExceptionHandler {
 
   /** Provides handling for exceptions throughout this service. */
   @ExceptionHandler({EntryNotFoundException.class, EntityNotFoundException.class,
-      ContentNotAllowedException.class, QuerySyntaxException.class})
+      ContentNotAllowedException.class, QuerySyntaxException.class,
+      InvalidDataAccessResourceUsageException.class})
   public final ResponseEntity<ApiError> handleException(Exception e, WebRequest request) {
 
     HttpHeaders headers = new HttpHeaders();
@@ -51,7 +53,7 @@ public class GlobalExceptionHandler {
       QuerySyntaxException qse = (QuerySyntaxException) e;
       return handleQuerySyntaxException(qse, headers, status, request);
     } else {
-      
+
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       return handleExceptionInternal(e, null, headers, status, request);
     }
@@ -72,7 +74,7 @@ public class GlobalExceptionHandler {
     List<String> errors = Collections.singletonList(e.getMessage());
     return handleExceptionInternal(e, new ApiError(errors), headers, status, request);
   }
-  
+
   /** Customize the response for EntityNotFoundException. */
   protected ResponseEntity<ApiError> handleEntityNotFoundException(EntityNotFoundException e,
       HttpHeaders headers, HttpStatus status, WebRequest request) {
