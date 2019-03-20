@@ -125,4 +125,9 @@ public class CrawlerServiceImpl implements CrawlerService {
     return crawlerRepository.findAll(pageable).getContent();
   }
 
+  @Override
+  public long count() {
+    return crawlerRepository.count();
+  }
+
 }

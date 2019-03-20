@@ -61,4 +61,9 @@ public class CustomersServiceImpl implements CustomersService {
     return customersRepository.findAll(pageable).getContent();
   }
 
+  @Override
+  public long count() {
+    return customersRepository.count();
+  }
+
 }
