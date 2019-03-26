@@ -48,8 +48,9 @@ export class HomePage implements OnInit {
 		await loading.present();
 		await this.api.getNews()
 		.subscribe(res => {
-			console.log(res);
-			//this.news = res.data;
+			if (res && res.data) {
+				this.news = res.data;
+			}
 			console.log(this.news);
 			loading.dismiss();
 		}, err => {
@@ -69,6 +70,6 @@ export class HomePage implements OnInit {
 		public route: ActivatedRoute) {}
 
 	ngOnInit() {
-		//this.getNews();
+		this.getNews();
 	}
 }
