@@ -2,6 +2,7 @@ package com.ntatvr.springmvc.controller;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ntatvr.springmvc.entity.Employee;
 import io.swagger.annotations.Api;
@@ -16,6 +17,7 @@ import io.swagger.annotations.Api;
  * @author AnhNT
  *
  */
+@CrossOrigin(maxAge = 3600)
 @Api(value = "EmployeesController", description = "REST APIs related to Employees Entity!",
     tags = "employees-controller")
 @Controller
