@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.ntatvr.springmvc.entity.Customer;
 
-
-@Repository("customerRepository")
+@Repository
 @Transactional(rollbackFor = Exception.class)
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-
+public interface CustomersRepository
+    extends JpaRepository<Customer, Integer>, CustomerRepositoryCustom {
 }

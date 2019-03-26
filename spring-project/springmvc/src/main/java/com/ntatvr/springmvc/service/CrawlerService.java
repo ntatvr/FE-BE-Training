@@ -1,17 +1,21 @@
 package com.ntatvr.springmvc.service;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.List;
+import com.ntatvr.springmvc.entity.Crawler;
 
-public interface CrawlerService {
+public interface CrawlerService extends GenericService<Crawler> {
 
-	
-	/**
-	 * Gets news
-	 *
-	 * @param url the URL
-	 * @return the page links
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-  HashSet<String> getNews(String url)  throws IOException ;
+  /**
+   * Gets news.
+   *
+   * @param url the URL
+   * @return the page links
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
+  List<Crawler> getNews(String url) throws IOException;
+
+  void save(List<Crawler> crawlers);
+  
+  void truncate();
 }

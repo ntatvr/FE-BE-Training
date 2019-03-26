@@ -18,7 +18,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The com.example.spring.repository package will be scanned to detect repositories Spring Data JPA
@@ -27,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author AnhNT
  *
  */
-@Slf4j
 @Configuration
 @EnableTransactionManagement
 @PropertySources({
@@ -78,13 +76,8 @@ public class PersistenceJPAConfig {
     return hibernateProperties;
   }
 
-  @Bean
+  @Bean(name = "dataSource")
   public DataSource dataSource() {
-
-    log.debug("jdbc.driverClassName {}", env.getProperty("jdbc.driverClassName"));
-    log.debug("jdbc.url {}", env.getProperty("jdbc.url"));
-    log.debug("jdbc.user {}", env.getProperty("jdbc.user"));
-    log.debug("jdbc.pass {}", env.getProperty("jdbc.pass"));
 
     final DriverManagerDataSource dataSource = new DriverManagerDataSource();
     dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
