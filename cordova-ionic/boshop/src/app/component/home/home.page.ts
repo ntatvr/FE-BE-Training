@@ -48,13 +48,14 @@ export class HomePage implements OnInit {
 		await loading.present();
 		await this.api.getNews()
 		.subscribe(res => {
-			if (res && res.data) {
-				this.news = res.data;
+			if (res) {
+				this.news = res['data'];
+				//Array.prototype.push.apply(this.news, res['data']);
 			}
-			console.log(this.news);
+			//console.log(this.news);
 			loading.dismiss();
 		}, err => {
-			console.log(err);
+			//console.log(err);
 			loading.dismiss();
 		});
 	}
