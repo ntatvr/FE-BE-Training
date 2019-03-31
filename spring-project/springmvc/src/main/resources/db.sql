@@ -27,4 +27,13 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
+CREATE TABLE `classicmodels`.`boshop_push_notifications` (
+  `id_push_notifications` INT NOT NULL,
+  `push_notifications_token` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_push_notifications`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
+
 
