@@ -71,6 +71,6 @@ export class HomePage implements OnInit {
 		public route: ActivatedRoute) {}
 
 	ngOnInit() {
-		this.getNews();
+		// this.getNews();
 	}
 }

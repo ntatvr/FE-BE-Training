@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "789873022720",
+    "firebase_url": "https://boshop-ntatvr.firebaseio.com",
+    "project_id": "boshop-ntatvr",
+    "storage_bucket": "boshop-ntatvr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789873022720:android:764d2cb7da3280eb",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789873022720-l76mk8n7tjemhp0rmlp76mkc2lfu531n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDneTy4VFkeVzDo-ExgeYZwbfr6O6r1GgY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

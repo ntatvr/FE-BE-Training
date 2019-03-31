@@ -14,8 +14,8 @@ const httpOptions = {
 				'Accept': 'application/json'
 			})
 };
-const apiUrl = "https://ntatvr.herokuapp.com/crawler?limit=20&page=0";
-//const apiUrl = "http://localhost:8080/springmvc/crawler";
+//const apiUrl = "https://ntatvr.herokuapp.com/crawler?limit=20&page=0";
+const apiUrl = "http://localhost:8080/springmvc/crawler";
 
 @Injectable({
 	providedIn: 'root'

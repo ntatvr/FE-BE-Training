@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Google firebase notifications
+import { FCM } from '@ionic-native/fcm/ngx';
+
 // register all required Angular Material components or modules
 import {
 	MatInputModule,
@@ -52,8 +55,9 @@ import { HttpClientModule } from '@angular/common/http';
  		AppRoutingModule
 	],
 	providers: [
-	StatusBar,
-	SplashScreen,
+		StatusBar,
+		SplashScreen,
+		FCM,
 	{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
 	],
 	bootstrap: [AppComponent]

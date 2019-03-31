@@ -17,6 +17,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'cart',
+        children: [
+          {
+            path: '',
+            loadChildren: '../component/cart/cart.module#CartPageModule'
+          }
+        ]
+      },
+      {
         path: 'contact',
         children: [
           {
