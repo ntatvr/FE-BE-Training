@@ -41,6 +41,7 @@ public class BoshopPushNotifications implements Serializable {
   private static final long serialVersionUID = 2590185890978563588L;
 
   @ApiModelProperty(name = "id_push_notifications", required = true)
+  @NotNull
   @Id
   @Column(name = "id_push_notifications")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
