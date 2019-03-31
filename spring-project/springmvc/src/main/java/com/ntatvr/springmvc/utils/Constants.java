@@ -22,6 +22,7 @@ public class Constants {
   public static final String MESSAGE_DELETE_SUCCESSFUL =
       CONFIG_PROPS.getProperty("response.get.success.delete-successful");
   
-  
+  public static final String MESSAGE_SAVE_SUCCESSFUL =
+      CONFIG_PROPS.getProperty("response.get.success.save-successful");
   
 }

@@ -50,7 +50,7 @@ public class BoshopProductController extends RESTController<BoshopProduct, Integ
     String sourceURI = "https://www.boshop.vn/nuoc-hoa.html";
     List<BoshopProduct> products = boshopProductService.getProducts(sourceURI);
     boshopProductService.truncate();
-    //boshopProductService.save(products);
+    // boshopProductService.save(products);
     return new ResponseEntity<>(new ApiData(products), HttpStatus.OK);
   }
 }
