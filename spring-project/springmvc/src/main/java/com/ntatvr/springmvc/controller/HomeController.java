@@ -11,7 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HelloController {
+public class HomeController {
+
+  @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+  public String homePage(Model model) {
+
+    model.addAttribute("title", "Welcome to Spring MVC project of ntatvr");
+    model.addAttribute("message", "This is home page!");
+    return "home";
+
+  }
 
   @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
   public String welcomePage(Model model) {
