@@ -24,9 +24,9 @@ public class EventCreator {
   @Scheduled(cron = "0 0 0 * * ?")
   public void crawler() throws IOException {
     System.out.println("Call API /crawler");
-    String sourceURI = "https://www.webtretho.com/forum/f26/";
-    List<Crawler> crawlers = crawlerService.getNews(sourceURI);
-    crawlerService.truncate();
-    crawlerService.save(crawlers);
+    //String sourceURI = "https://www.webtretho.com/forum/f26/";
+    //List<Crawler> crawlers = crawlerService.getNews(sourceURI);
+    //crawlerService.truncate();
+    //crawlerService.save(crawlers);
   }
 }
