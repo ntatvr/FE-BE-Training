@@ -59,29 +59,29 @@ while (events = demultiplexer.watch(watchedList)) {           // (2)
 - The reactor pattern: The main idea behind the reactor pattern is to have a handler associated with each I/O operation. A handler in Node.js is represented by a callback (or cb for short) function. 
 https://stackoverflow.com/questions/56622353/how-does-reactor-pattern-work-in-node-js
 
-##1. HTTP server: 
+## 1. HTTP server: 
 - The 'http' provides the functionality to module to create a HTTP server by using http.createServer() method.
 ```JavaScript
 const server = http.createServer((req, res) => {});
 ```
 
-##2. Debugging Your NodeJS Application
+## 2. Debugging Your NodeJS Application
 - You can use the node-inspector. Run this command to install it via npm:
 npm install -g node-inspector
 
 - Then you can debug your application using
 node-debug app.js
 
-##3. How to get a basic HTTPS web server up and running!
+## 3. How to get a basic HTTPS web server up and running!
 https://riptutorial.com/node-js#how-to-get-a-basic-https-web-server-up-and-running-
 
-##4. Async in NodeJS: using with callback
+## 4. Async in NodeJS: using with callback
 - Callback: What are callbacks? Callbacks are basically just functions that you pass to other functions.
 https://nodejs.org/en/knowledge/getting-started/control-flow/what-are-callbacks/
 ```JavaScript
 function callback(err, result [, arg1[, ...]])
 ```
-###4.1. Callbacks: simple, obvious, …hellish
+### 4.1. Callbacks: simple, obvious, …hellish
 - Callback Hell: How do I fix callback hell?
 http://callbackhell.com/
 ```JavaScript
@@ -107,7 +107,7 @@ function todoAfterAB() {
 }
 ```
 
-###4.2. Async module: is not a good solution for "Callback hell" because we still need something nesting.
+### 4.2. Async module: is not a good solution for "Callback hell" because we still need something nesting.
 ```JavaScript
 const async = require('async');
 async.parallel(
@@ -129,7 +129,7 @@ async.parallel(
 ```
 The name, “parallel”. Because as you know Node.js is single threaded, so the only thing happening in parallel is the IO, done outside Javascript code
 
-###4.3 Promises: promise is just an enhancement to callback functions in Node.js. During the development lifecycle, there may be an instance where you would need to nest multiple callback functions together. This can get kind of messy and difficult to maintain at a certain point in time. In short, a promise is an enhancement to callbacks that looks towards alleviating these problems.
+### 4.3 Promises: promise is just an enhancement to callback functions in Node.js. During the development lifecycle, there may be an instance where you would need to nest multiple callback functions together. This can get kind of messy and difficult to maintain at a certain point in time. In short, a promise is an enhancement to callbacks that looks towards alleviating these problems.
 ```JavaScript
 var promise = doSomethingAync()
 promise.then(onFulfilled, onRejected)
@@ -140,7 +140,7 @@ promise.then(onFulfilled, onRejected)
 
 Creating a custom promise: A custom promise can be created by using a node module called 'q.'. It is used to convert any function into a function that would return a promise
 
-###4.4 Async/Await: to use async/await, you actually need code that returns promises. 
+### 4.4 Async/Await: to use async/await, you actually need code that returns promises. 
 ```JavaScript
 // ...
 async function showFileContents() {
@@ -171,12 +171,12 @@ The important links between promises and async/await are:
 showFileContents().then(() => console.log('We did it!'))
 ```
 
-##5. Event Emitter
+## 5. Event Emitter
 https://medium.com/edge-coders/understanding-node-js-event-driven-architecture-223292fcbc2d
 ###5.1 Understanding Node.js Event-Driven Architecture
 - Most of Node’s objects — like HTTP requests, responses, and streams — implement the EventEmitter module so they can provide a way to emit and listen to events.
 
-###5.2 The EventEmitter Module
+### 5.2 The EventEmitter Module
 The EventEmitter is a module that facilitates communication between objects in Node. EventEmitter is at the core of Node asynchronous event-driven architecture. Many of Node’s built-in modules inherit from EventEmitter.
 The concept is simple: emitter objects emit named events that cause previously registered listeners to be called. So, an emitter object basically has two main features:
 - Emitting name events.
@@ -219,7 +219,7 @@ process.on('uncaughtException', (err) => {
 
 - Order of Listeners: If we register multiple listeners for the same event, the invocation of those listeners will be in order. The first listener that we register is the first listener that gets invoked. Using 'prependListener' method to trigger event if there are more than one listener.
 
-##6. Stream
+## 6. Stream
 Streams are one of the fundamental concepts that power Node.js applications. They are data-handling method and are used to read or write input into output sequentially.
 Streams are a way to handle reading/writing files, network communications, or any kind of end-to-end information exchange in an efficient way.
 What makes streams unique, is that instead of a program reading a file into memory all at once like in the traditional way, streams read chunks of data piece by piece, processing its content without keeping it all in memory.
