@@ -1,18 +1,22 @@
-// Import the top-level function of express
-const express = require('express');
+'use strict';
 
-// Creates an Express application using the top-level function
-const app = express();
+const Hapi = require('@hapi/hapi');
 
-// Define port number as 3000
-const port = 3000;
+const init = async () => {
 
-// Routes HTTP GET requests to the specified path "/" with the specified callback function
-app.get('/', function(request, response) {
-  response.send('Hello, World!');
+    const server = Hapi.server({
+        port: 3000,
+        host: 'localhost'
+    });
+
+    await server.start();
+    console.log('Server running on %s', server.info.uri);
+};
+
+process.on('unhandledRejection', (err) => {
+
+    console.log(err);
+    process.exit(1);
 });
 
-// Make the app listen on port 3000
-app.listen(port, function() {
-  console.log('Server listening on http://localhost:' + port);
-});
+init();

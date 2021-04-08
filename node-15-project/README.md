@@ -1,11 +1,6 @@
 # NodeJS
 - Version: I'm using version v15.0.0
 
-# Express
-- Install: npm install --save express
-
-- Listen port: 3000
-
 # How Node.js works (Reactoer Pattern)
 - I/O is slow. I/O is usually not expensive in terms of CPU, but it adds a delay between the moment the request is sent to the device and the moment the operation completes.
 - Blocking I/O: not able to handle multiple connections to the same thread (waiting for the response). This is because each I/O operation on a socket will block the processing of any other connection. The traditional approach to solving this problem is to use a separate thread (or process) to handle each concurrent connection.
@@ -58,6 +53,21 @@ while (events = demultiplexer.watch(watchedList)) {           // (2)
 ```
 - The reactor pattern: The main idea behind the reactor pattern is to have a handler associated with each I/O operation. A handler in Node.js is represented by a callback (or cb for short) function. 
 https://stackoverflow.com/questions/56622353/how-does-reactor-pattern-work-in-node-js
+
+## Message queue
+### process.nextTick()
+When we pass a function to process.nextTick(), we instruct the engine to invoke this function at the end of the current operation, before the next event loop tick starts:
+```JavaScript
+process.nextTick(() => {
+  //do something
+})
+```
+Calling setTimeout(() => {}, 0) will execute the function at the end of next tick, much later than when using nextTick() which prioritizes the call and executes it just before the beginning of the next tick.
+
+### process.setImmediate()
+When you want to execute some piece of code asynchronously, but as soon as possible, one option is to use the setImmediate() function provided by Node.js
+
+# Node essential patterns
 
 ## 1. HTTP server: 
 - The 'http' provides the functionality to module to create a HTTP server by using http.createServer() method.
@@ -220,8 +230,29 @@ process.on('uncaughtException', (err) => {
 - Order of Listeners: If we register multiple listeners for the same event, the invocation of those listeners will be in order. The first listener that we register is the first listener that gets invoked. Using 'prependListener' method to trigger event if there are more than one listener.
 
 ## 6. Stream
-Streams are one of the fundamental concepts that power Node.js applications. They are data-handling method and are used to read or write input into output sequentially.
-Streams are a way to handle reading/writing files, network communications, or any kind of end-to-end information exchange in an efficient way.
-What makes streams unique, is that instead of a program reading a file into memory all at once like in the traditional way, streams read chunks of data piece by piece, processing its content without keeping it all in memory.
-There are 4 types of streams in Node.js: Writable, Readable, Duplex and Transform
+- Streams are one of the fundamental concepts that power Node.js applications. They are data-handling method and are used to read or write input into output sequentially.
+- Streams are a way to handle reading/writing files, network communications, or any kind of end-to-end information exchange in an efficient way.
+- What makes streams unique, is that instead of a program reading a file into memory all at once like in the traditional way, streams read chunks of data piece by piece, processing its content without keeping it all in memory.
+### 6.1 There are 4 types of streams in Node.js: Writable, Readable, Duplex and Transform
+
+## 7. Expose functionality from a Node.js file using exports
+
+# HAPI - https://livebook.manning.com/book/hapi-js-in-action/chapter-1/23
+## What is hapi?
+Hapi is an open source framework for building web applications with Node. HAPI sits between Node and your own application’s code .providing an abstraction layer for working with HTTP requests and responses.
+## What makes hapi special?
+- It's NodeJS
+- Strong focus on modularity helps teams
+- Configuration-driven features
+- It’s really quick to get started
+- It’s open source
+- It’s been battle-tested in production
+
+Express vs HAPI:
+1. It is easier to define route.
+2. Plugin and MiddleWares
+
+## The building blocks of hapi
+![Blocks of HAPI](../readme-assets/the-building-blocks-of-hapi.jpg)
+https://livebook.manning.com/book/hapi-js-in-action/chapter-1/76
 
