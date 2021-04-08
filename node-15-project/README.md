@@ -55,6 +55,7 @@ while (events = demultiplexer.watch(watchedList)) {           // (2)
 https://stackoverflow.com/questions/56622353/how-does-reactor-pattern-work-in-node-js
 
 ## Message queue
+
 ### process.nextTick()
 When we pass a function to process.nextTick(), we instruct the engine to invoke this function at the end of the current operation, before the next event loop tick starts:
 ```JavaScript
@@ -183,7 +184,8 @@ showFileContents().then(() => console.log('We did it!'))
 
 ## 5. Event Emitter
 https://medium.com/edge-coders/understanding-node-js-event-driven-architecture-223292fcbc2d
-###5.1 Understanding Node.js Event-Driven Architecture
+
+### 5.1 Understanding Node.js Event-Driven Architecture
 - Most of Node’s objects — like HTTP requests, responses, and streams — implement the EventEmitter module so they can provide a way to emit and listen to events.
 
 ### 5.2 The EventEmitter Module
@@ -233,13 +235,16 @@ process.on('uncaughtException', (err) => {
 - Streams are one of the fundamental concepts that power Node.js applications. They are data-handling method and are used to read or write input into output sequentially.
 - Streams are a way to handle reading/writing files, network communications, or any kind of end-to-end information exchange in an efficient way.
 - What makes streams unique, is that instead of a program reading a file into memory all at once like in the traditional way, streams read chunks of data piece by piece, processing its content without keeping it all in memory.
+- 
 ### 6.1 There are 4 types of streams in Node.js: Writable, Readable, Duplex and Transform
 
 ## 7. Expose functionality from a Node.js file using exports
 
 # HAPI - https://livebook.manning.com/book/hapi-js-in-action/chapter-1/23
+
 ## What is hapi?
 Hapi is an open source framework for building web applications with Node. HAPI sits between Node and your own application’s code .providing an abstraction layer for working with HTTP requests and responses.
+
 ## What makes hapi special?
 - It's NodeJS
 - Strong focus on modularity helps teams
@@ -253,6 +258,5 @@ Express vs HAPI:
 2. Plugin and MiddleWares
 
 ## The building blocks of hapi
-![Blocks of HAPI](../readme-assets/the-building-blocks-of-hapi.jpg)
-https://livebook.manning.com/book/hapi-js-in-action/chapter-1/76
+![](readme-assets/the-building-blocks-of-hapi.jpg)
 
