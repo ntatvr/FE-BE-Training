@@ -2,15 +2,15 @@
 - Version: I'm using version v15.0.0
 
 # How Node.js works (Reactoer Pattern)
-- I/O is slow. I/O is usually not expensive in terms of CPU, but it adds a delay between the moment the request is sent to the device and the moment the operation completes.
-- Blocking I/O: not able to handle multiple connections to the same thread (waiting for the response). This is because each I/O operation on a socket will block the processing of any other connection. The traditional approach to solving this problem is to use a separate thread (or process) to handle each concurrent connection.
+## I/O is slow. I/O is usually not expensive in terms of CPU, but it adds a delay between the moment the request is sent to the device and the moment the operation completes.
+## Blocking I/O: not able to handle multiple connections to the same thread (waiting for the response). This is because each I/O operation on a socket will block the processing of any other connection. The traditional approach to solving this problem is to use a separate thread (or process) to handle each concurrent connection.
 ```JavaScript
 // blocks the thread until the data is available
 data = socket.read()
 // data is available
 print(data)
 ```
-- Non-blocking I/O: always return immediately without waiting for data to be read or written. The most basic pattern for dealing with this type of non-blocking I/O is to actively poll the resource within a loop until some actual data is returned. This is called 'busy-waiting'. (not efficient)
+## Non-blocking I/O: always return immediately without waiting for data to be read or written. The most basic pattern for dealing with this type of non-blocking I/O is to actively poll the resource within a loop until some actual data is returned. This is called 'busy-waiting'. (not efficient)
 ```JavaScript
 resources = [socketA, socketB, fileA]
 while (!resources.isEmpty()) {
@@ -31,7 +31,7 @@ while (!resources.isEmpty()) {
   }
 }
 ```
-- Event demultiplexing: handle concurent non-blocking resources - synchronous event demultiplexer (also know as event notification interface)
+## Event demultiplexing: handle concurent non-blocking resources - synchronous event demultiplexer (also know as event notification interface)
 
 ```JavaScript
 watchedList.add(socketA, FOR_READ)                            // (1)
@@ -260,3 +260,50 @@ Express vs HAPI:
 ## The building blocks of hapi
 ![](readme-assets/the-building-blocks-of-hapi.jpg)
 
+## When you should use hapi
+
+### JSON APIs: Hapi’s extensive feature set—including routing, input and output validation, authentication, caching, and automatic documentation—makes building APIs with hapi a pleasurable experience.
+- Static or database-driven websites
+- Single-page applications
+- Proxies
+
+## When you shouldn’t use hapi
+- JavaScript code in a Node app runs in only a single OS thread, it’s not the right choice for CPU-intensive applications, so it wouldn’t make sense to write things like video encoders, AI software, or 3D-rendering applications with hapi.
+- Using hapi as a web front end to those systems, or from using native modules for node.js.
+- hard real-time applications
+
+## Authentication
+### Scheme vs Strategies
+- Schemes are a way of handling authentication within hapi.
+- We use strategies to implement authentication schemes into your application.
+https://hapi.dev/tutorials/auth/?lang=en_US
+
+# Routes and handlers in-depth
+## Route methods
+## Parameterized paths
+## How hapi picks a route?
+## BUILDING CUSTOM HANDLERS
+- What is Vision in hapi? Vision is a templates rendering plugin for hapi.js
+- Engines? Path?
+## Route prerequisites
+- which help to simplify request processing workflows involving multiple steps that must execute sequentially or in parallel.
+- Ex: using rout prerequisites to decrypt a message.
+- Here are more ideas of where you could apply route prerequisites. Why not try building some yourself to help improve your skills with pres?
+1. Fetch tweets using the Twitter API in a pre, then render these in a list inside the handler.
+2. Geolocate a user inside a pre using their IP address with https://freegeoip.net and log this in the handler.
+3. Create a workflow that combines the previous two examples to show the user a list of tweets about their current location.
+4. Extend your solution to exercise 3 by also logging the user’s IP address and location to a file. Note that this step can run in parallel to fetching the tweets.
+
+## MANAGING FILE UPLOADS TO HAPI APPLICATIONS
+1. Using data output: read the file contents into memory (can not get file name)
+2. Using stream output: get the files as streams
+maxBytes: default 1MB
+timeout: default 10 seconds
+
+# Understanding requests and responses
+1. Understanding the hapi.js request lifecycle
+![](readme-assets/request-life-circle.PNG)
+2. Using extension points
+3. Examining the reply interface in depth
+4. Looking at the response object
+5. Dealing with handling and communicating errors

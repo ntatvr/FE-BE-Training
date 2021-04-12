@@ -1,6 +1,19 @@
 {
+  "name": "FakeDinDin",
+  "version": "1.0.0",
+  "description": "A social network for food",
+  "main": "src/index.js",
+  "author": "NTATVR",
+  "private": true,
   "dependencies": {
+    "@hapi/basic": "^6.0.0",
+    "@hapi/boom": "^9.1.2",
     "@hapi/hapi": "^20.1.2",
-    "express": "^4.17.1"
+    "@hapi/vision": "^6.0.1",
+    "accept": "^2.1.4",
+    "bcrypt": "^5.0.1",
+    "handlebars": "^4.7.7",
+    "mongoose": "^5.12.3",
+    "uuid": "^8.3.2"
   }
 }
