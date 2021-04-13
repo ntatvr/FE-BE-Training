@@ -341,3 +341,26 @@ Returns an object with the following keys:
 ## Adding validation to hapi.js apps
 ## Customizing validation errors
 ## Consuming and presenting validation errors
+
+# Modularity with plugins
+- Plugins can contain routes, server methods, extension points, custom handlers, and decorators.
+- Normally, most plugins are either containers of business logic or utilities. 
+
+## Defining plugins and why you should use them
+## Creating and loading plugins
+## Building applications in a modular way using plugins
+## Communicating and sharing data between plugins
+
+
+### What is Glue utility?
+https://www.npmjs.com/package/glue
+- Glue is a utility designed for use with hapi (it’s not a hapi plugin, but a normal package from npm) that does this legwork for us.
+- It lets you define an entire application in a configuration object called a manifest. A manifest is nothing special—it’s a plain­ old JavaScript object with a specific set of properties.
+- Glue takes a manifest and builds a server with all the connections and plugins loaded how you specified. It’s pretty awesome to see it in action.
+
+### Smart configuration with the Confidence utility
+- Confidence is a hapi utility for capturing more complex configuration requirements entirely in a single JavaScript object (or a JSON document)
+
+
+Run App by env: NODE_ENV=production node ./src/index.js
+https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html

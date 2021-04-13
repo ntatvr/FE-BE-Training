@@ -1,5 +1,7 @@
 'use strict';
-
+require('dotenv').config();
+const Glue = require('@hapi/glue');
+const Manifest = require('../manifest-config.js');
 const Boom = require('@hapi/boom');
 const Hapi = require('@hapi/hapi');
 const mongoose = require('mongoose');
@@ -16,20 +18,16 @@ const blockIps = function(request, h) {
     return h.continue;
 }
 
-const init = async () => {
+const startServer = async () => {
 
-    const server = Hapi.server({
-        port: 3000,
-        host: 'localhost'
-    });
+    const server = await Glue.compose(Manifest, {relativeTo: __dirname});
 
-    const mean = function(values, next) {
-        const sum = values.reduce((a, b) => a + b);
-        return next(null, sum / values.length);
-    }
+    // const mean = function(values, next) {
+    //     const sum = values.reduce((a, b) => a + b);
+    //     return next(null, sum / values.length);
+    // }
 
-    server.method('mean', mean, {});
-    
+    // server.method('mean', mean, {});
     server.ext('onRequest', blockIps);
 
 
@@ -40,7 +38,6 @@ const init = async () => {
     await server.register(require('@hapi/vision'));
     server.views({
         engines: {
-            //html: require('handlebars'),
             hbs: hbs
         },
         context,
@@ -93,4 +90,4 @@ process.on('unhandledException', (err) => {
     process.exit(1);
 });
 
-init();
+startServer();
