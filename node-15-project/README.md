@@ -301,9 +301,43 @@ maxBytes: default 1MB
 timeout: default 10 seconds
 
 # Understanding requests and responses
-1. Understanding the hapi.js request lifecycle
+## Understanding the hapi.js request lifecycle
+
 ![](readme-assets/request-life-circle.PNG)
-2. Using extension points
-3. Examining the reply interface in depth
-4. Looking at the response object
-5. Dealing with handling and communicating errors
+
+## Using extension points
+- Which extension point should I use?
++ on­Request extension point comes before payload reading and parsing occurs, or need to modifies the URL
++ onPostAuth: access to the request payload in your extension function
+
+## Examining the reply interface in depth (in hapi 17+, it is changed to response toolkit https://hapi.dev/api/?v=20.1.2#response-toolkit)
+
+## Looking at the response object (There are some new methods in hapi 17+ https://hapi.dev/api/?v=20.1.2#response-properties)
+HOW TO STREAM FILE DOWNLOADS IN NODE.JS WITH GOT?
+https://philna.sh/blog/2020/08/06/how-to-stream-file-downloads-in-Node-js-with-got/
+- If the server you are downloading from doesn’t return a Content-Length header for the file, then total will be undefined and percent will be 0 until the download is complete.
+
+## Dealing with handling and communicating errors
+
+# Validation with Joi
+## Working with Joi
+```JavaScript
+const schema = Joi.object({
+    a: Joi.number()
+});
+
+const value = {
+    a: '123'
+};
+
+const result = schema.validate(value);
+```
+Returns an object with the following keys:
+- value - the validated and normalized value.
+- error - the validation errors if found.
+- warning - the generated warnings if any.
+- artifacts - a Map containing any passing rules' artifacts and their corresponding array of paths.
+
+## Adding validation to hapi.js apps
+## Customizing validation errors
+## Consuming and presenting validation errors

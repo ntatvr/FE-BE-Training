@@ -1,5 +1,6 @@
 'use strict';
 
+const Boom = require('@hapi/boom');
 const Hapi = require('@hapi/hapi');
 const mongoose = require('mongoose');
 const MongoDBUrl = 'mongodb://localhost:30001/fake_dindin';
@@ -7,6 +8,13 @@ const MongoDBUrl = 'mongodb://localhost:30001/fake_dindin';
 const context = {
     title: 'My Fake DinDin site'
 };
+
+const blockIps = function(request, h) {
+    const ip = request.info.remoteAddress;
+    console.log('blockIps: ' + ip);
+    //throw Boom.forbidden('try again some time');
+    return h.continue;
+}
 
 const init = async () => {
 
@@ -22,16 +30,24 @@ const init = async () => {
 
     server.method('mean', mean, {});
     
+    server.ext('onRequest', blockIps);
+
+
+    let hbs = require('handlebars');
+    hbs.registerHelper("inc", function(value, options) {
+        return parseInt(value) + 1;
+    });
     await server.register(require('@hapi/vision'));
     server.views({
         engines: {
-            html: require('handlebars')
+            //html: require('handlebars'),
+            hbs: hbs
         },
         context,
         relativeTo: __dirname,
         path: 'templates',
-        //layout: true,
-        //layoutPath: 'templates/layout'
+        layout: true,
+        layoutPath: 'templates/layout'
     });
 
     // Custom handler
@@ -68,6 +84,11 @@ const init = async () => {
 };
 
 process.on('unhandledRejection', (err) => {
+    console.log(err);
+    process.exit(1);
+});
+
+process.on('unhandledException', (err) => {
     console.log(err);
     process.exit(1);
 });

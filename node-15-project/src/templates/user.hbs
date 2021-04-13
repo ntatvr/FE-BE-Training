@@ -1,0 +1,28 @@
+<div class="row" id="formErrors">
+	<div class="col-sm-10 col-sm-offset-2">
+		{{!-- Error summary goes here --}}
+		{{#each errors}}
+			<p class="text-danger">{{this}}</p>
+		{{/each}}
+	</div>
+</div>
+
+<form action="/users" class="form-horizontal" method="post">
+	<div class="form-group" >
+		<label class="col-sm-2 control-label">Username</label>
+		<div class="col-sm-10">
+			<input type="text" name="username" class="form-control {{#if errors.username}}is-invalid{{/if}}" value="{{values.username}}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Password</label>
+		<div class="col-sm-10">
+			<input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" value="{{values.password}}">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button class="btn btn-default" type="submit">Submit</button>
+		</div>
+	</div>
+</form>
