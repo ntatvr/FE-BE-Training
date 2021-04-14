@@ -29,8 +29,7 @@ const startServer = async () => {
 
     // server.method('mean', mean, {});
     server.ext('onRequest', blockIps);
-
-
+    
     let hbs = require('handlebars');
     hbs.registerHelper("inc", function(value, options) {
         return parseInt(value) + 1;

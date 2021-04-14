@@ -1,5 +1,5 @@
-const User =  require('../models/user');
-const Authentication =  require('../auth/authentication');
+const User =  require('../model/user');
+const Security =  require('../security');
 const Joi = require('joi');
 const Boom = require('@hapi/boom');
 
@@ -10,34 +10,36 @@ async function findOne(request, h) {
 }
 
 exports.find = async (request, h) => {
-	return User.find({});
+	console.log('Get All Users');
+	return User.find({}).catch(e => {
+		console.log('Error: ', e.message);
+		throw Boom.badRequest(e.message);
+	});;
 }
 
 exports.findOne = async (request, h) => {
-	return findOne(request, h);
+	return findOne(request, h).catch(e => {
+		console.log('Error: ', e.message);
+		throw Boom.badRequest(e.message);
+	});
 }
 
 exports.save = async (request, h) => {
-	// validate
-
-	const schema = Joi.object({
-		username: Joi.string().alphanum().min(6).max(30).required(),
-	});
-
-	const result = schema.validate({ username: request.payload.username});
-	console.log(result);
 
 	var userData = new User();
 	if (request.params.id) {
 		userData = await findOne(request, h);
 	}
+
 	userData.username = request.payload.username;
-	userData.password = await Authentication.encrypt(request.payload.password);
+	userData.password = await Security.encrypt(request.payload.password);
+	userData.roles = request.payload.roles;
 	console.log(userData);
+
 	await userData.save().catch(e => {
 		console.log('Error: ', e.message);
 		throw Boom.badRequest(e.message);
-	});;
+	});
 	return { message: "User is updated successfully", user: userData };
 }
 

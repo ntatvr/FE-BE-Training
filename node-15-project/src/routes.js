@@ -1,14 +1,7 @@
 'use strict';
-const Accept = require('accept');
-const Assets = require('./controllers/assets');
-const Recipes = require('./models/recipe');
-const UserController =  require('./controllers/user');
-const RecipeController =  require('./controllers/recipe');
 const Fs = require('fs');
 const Path = require('path');
-const Wreck = require('@hapi/wreck');
 const Got = require('got');
-const Joi = require('joi');
 
 const poem = function(request, h) {
     try {
@@ -45,7 +38,7 @@ module.exports = [
     },
     {
 		method: 'GET',
-        path: '/download',
+        path: '/download/{ttl?}',
         handler: function(request, h) {
 
         	//let url = 'https://filesamples.com/samples/video/mp4/sample_3840x2160.mp4';
@@ -59,10 +52,22 @@ module.exports = [
 			  	.on("error", (error) => {
 			    	console.error(`Download failed: ${error.message}`);
 			});
-        	return h.response(downloadStream)
-        	.type('image/gif')
-		    .header('Content-type', 'image/gif')
-		    .header("Accept-Ranges", "bytes");
+        	const response = h.response(downloadStream)
+            	.type('image/gif')
+    		    .header('Content-type', 'image/gif')
+    		    .header('Accept-Ranges', 'bytes'); // cache 24h
+            
+            if (request.params.ttl) {
+                response.ttl(request.params.ttl);
+            }
+
+            return response;
+        },
+        options: {
+            cache: {
+                expiresIn: 30 * 1000,
+                privacy: 'private'
+            }
         }
     },
     // hapi will parse multipart/form­data requests by default.
@@ -122,103 +127,4 @@ module.exports = [
         	return h.response(request.pre.poem).code(200);
         }
     },
-	/* Recipe APIs */
-	{
-		method: 'GET',
-		path: '/api/recipes',
-		handler: RecipeController.find
-	},
-	{
-		method: 'GET',
-		path: '/api/recipes/{id}',
-		handler: RecipeController.findOne
-	},
-	{
-		method: 'POST',
-		path: '/api/recipes',
-		handler: RecipeController.save
-	},
-	{
-		method: 'PUT',
-		path: '/api/recipes/{id}',
-		handler: RecipeController.save
-	},
-	{
-		method: 'DELETE',
-		path: '/api/recipes/{id}',
-		handler: RecipeController.delete
-	},
-	/* Users APIs */
-	{
-		method: 'GET',
-		path: '/api/users',
-		handler: UserController.find
-	},
-	{
-		method: 'GET',
-		path: '/api/users/{id}',
-		handler: UserController.findOne
-	},
-	{
-		options: {
-			validate: {
-				payload: Joi.object({
-					username: Joi.string().alphanum().min(6).max(30).required(),
-					password: Joi.string().alphanum().min(6).max(30).required()
-				})
-			}
-		},
-		method: 'POST',
-		path: '/api/users',
-		handler: UserController.save
-	},
-	{
-		method: 'PUT',
-		path: '/api/users/{id}',
-		handler: UserController.save
-	},
-	{
-		method: 'DELETE',
-		path: '/api/users/{id}',
-		handler: UserController.delete
-	},
-	// {
-	// 	method: 'GET',
-	// 	path: '/users',
-	// 	handler: function(request, h) {
- //        	return h.view('user');
- //        }
-	// },
-	// {
-	// 	options: {
-	// 		validate: {
-	// 			payload: Joi.object({
-	// 				username: Joi.string().alphanum().min(6).max(30).required(),
-	// 				password: Joi.string().alphanum().min(6).max(30).required()
-	// 			}),
-	// 			options: {
-	// 				abortEarly: false
-	// 			},
-	// 			failAction : function (request, h, error) {
-	// 				const errors = {};
-	// 				const details = error.details;
-	// 				for (let i = 0; i < details.length; ++i) {
-	// 					if (!errors.hasOwnProperty(details[i].path)) {
-	// 						errors[details[i].path] = details[i].message;
-	// 					}
-	// 				}
-
-	// 				return h.view('user', {
-	// 					errors: errors,
-	// 					values: request.payload
-	// 				}).code(error.output.statusCode).takeover();
-	// 			}
-	// 		}
-	// 	},
-	// 	method: 'POST',
-	// 	path: '/users',
-	// 	handler: function(request, h) {
- //        	return h.view('user');
- //        }
-	// },
 ];

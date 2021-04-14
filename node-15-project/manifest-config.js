@@ -19,6 +19,15 @@ const manifest = {
                 routes: {
                     prefix: '/auth'
                 }
+            },
+            {
+                plugin: '../plugins/recipe',
+                options: {
+                    sessiontime: 500
+                },
+                routes: {
+                    prefix: '/recipe'
+                }
             }
         ],
         options: {

@@ -278,7 +278,7 @@ Express vs HAPI:
 - We use strategies to implement authentication schemes into your application.
 https://hapi.dev/tutorials/auth/?lang=en_US
 
-# Routes and handlers in-depth
+# Chapter 4. Routes and handlers in-depth
 ## Route methods
 ## Parameterized paths
 ## How hapi picks a route?
@@ -300,7 +300,7 @@ https://hapi.dev/tutorials/auth/?lang=en_US
 maxBytes: default 1MB
 timeout: default 10 seconds
 
-# Understanding requests and responses
+# Chapter 5. Understanding requests and responses
 ## Understanding the hapi.js request lifecycle
 
 ![](readme-assets/request-life-circle.PNG)
@@ -319,7 +319,8 @@ https://philna.sh/blog/2020/08/06/how-to-stream-file-downloads-in-Node-js-with-g
 
 ## Dealing with handling and communicating errors
 
-# Validation with Joi
+# Chapter 6. Validation with Joi
+
 ## Working with Joi
 ```JavaScript
 const schema = Joi.object({
@@ -342,7 +343,7 @@ Returns an object with the following keys:
 ## Customizing validation errors
 ## Consuming and presenting validation errors
 
-# Modularity with plugins
+# Chapter 7. Building modular applications with plugins
 - Plugins can contain routes, server methods, extension points, custom handlers, and decorators.
 - Normally, most plugins are either containers of business logic or utilities. 
 
@@ -364,3 +365,36 @@ https://www.npmjs.com/package/glue
 
 Run App by env: NODE_ENV=production node ./src/index.js
 https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
+
+# Chapter 8. Cache me if you can
+## Managing client­side caching
+## Introducing Catbox
+## Server­side caching with hapi (Using Redis or Memcached)
+
+# Chapter 9. Authentication and security
+## 9.1. Authentication in depth
+- The way that you’ve decided users should authenticate with a route, is called the authentication scheme
+- A strategy is a named instance of a scheme that you can use in hapi to authenticate requests to a route
+
+### Which authentication scheme should I choose?
+- hapi­auth­basic — Supports HTTP basic authentication. Usable for both websites and APIs. Recommended for use only over SSL/TLS as username/password are sent as cleartext over the network.
+- hapi­auth­cookie — Implements cookie authentication and basic session support. Highly useful for websites. Often coupled with form­based login.
+- hapi­auth­hawk — New authentication scheme for APIs created by Eran Hammer (author of hapi). Intended to be an improvement over HTTP Digest authentication. Relies on a shared secret key between client and server
+
+# Chapter 10: Scalability and Architechtural Patterns
+- Load balancing with cluster
+- Zero-downtime restart
+- Dealing with stateful communications
+- Sharing the state across multiple instances
+- Sticky load balancing
+- Scaling with a reverse proxy
+- Using a Service Registry
+
+
+375
+
+
+
+
+
+

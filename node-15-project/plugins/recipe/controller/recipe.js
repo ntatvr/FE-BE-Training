@@ -1,4 +1,4 @@
-const Recipe =  require('../models/recipe');
+const Recipe =  require('../model/recipe');
 
 async function findOne(request, h) {
 	let recipe = await Recipe.findById(request.params.id);

@@ -1,5 +1,6 @@
 'use strict';
 const Joi = require('joi');
+const UserController =  require('./controller/user');
 
 module.exports = [
 	{
@@ -16,7 +17,8 @@ module.exports = [
 			validate: {
 				payload: Joi.object({
 					username: Joi.string().alphanum().min(6).max(30).required(),
-					password: Joi.string().alphanum().min(6).max(30).required()
+					password: Joi.string().alphanum().min(6).max(30).required(),
+					roles: Joi.array().min(0)
 				}),
 				options: {
 					abortEarly: false
@@ -43,5 +45,46 @@ module.exports = [
 
         	return h.view('user');
         }
+	},
+	/* Users APIs */
+	{
+		method: 'GET',
+		path: '/v1/users',
+		handler: UserController.find,
+		options: {
+            cache: {
+                expiresIn: 30 * 1000,
+                privacy: 'private'
+            }
+        }
+	},
+	{
+		method: 'GET',
+		path: '/v1/users/{id}',
+		handler: UserController.findOne
+	},
+	{
+		options: {
+			validate: {
+				payload: Joi.object({
+					username: Joi.string().alphanum().min(6).max(30).required(),
+					password: Joi.string().alphanum().min(6).max(30).required(),
+					roles: Joi.array().min(0)
+				})
+			}
+		},
+		method: 'POST',
+		path: '/v1/users',
+		handler: UserController.save
+	},
+	{
+		method: 'PUT',
+		path: '/v1/users/{id}',
+		handler: UserController.save
+	},
+	{
+		method: 'DELETE',
+		path: '/v1/users/{id}',
+		handler: UserController.delete
 	},
 ];
