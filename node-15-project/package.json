@@ -2,7 +2,7 @@
   "name": "FakeDinDin",
   "version": "1.0.0",
   "description": "A social network for food",
-  "main": "src/index.js",
+  "main": "excercise/server.js",
   "author": "NTATVR",
   "private": true,
   "dependencies": {
@@ -19,8 +19,11 @@
     "got": "^11.8.2",
     "handlebars": "^4.7.7",
     "hapi-auth-basic": "^5.0.0",
+    "hapi-auth-jwt": "^4.0.0",
+    "hapi-pino": "^8.3.0",
     "hbs": "^4.1.1",
     "joi": "^17.4.0",
+    "kafka-node": "^5.0.0",
     "mongoose": "^5.12.3",
     "uuid": "^8.3.2"
   }

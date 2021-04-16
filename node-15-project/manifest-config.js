@@ -28,6 +28,12 @@ const manifest = {
                 routes: {
                     prefix: '/recipe'
                 }
+            },
+            {
+                plugin: '../plugins/chat',
+                routes: {
+                    prefix: '/chat'
+                }
             }
         ],
         options: {

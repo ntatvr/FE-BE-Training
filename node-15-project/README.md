@@ -381,7 +381,9 @@ https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
 - hapi­auth­cookie — Implements cookie authentication and basic session support. Highly useful for websites. Often coupled with form­based login.
 - hapi­auth­hawk — New authentication scheme for APIs created by Eran Hammer (author of hapi). Intended to be an improvement over HTTP Digest authentication. Relies on a shared secret key between client and server
 
-# Chapter 10: Scalability and Architechtural Patterns
+=============================================================================================================
+
+# Chapter 7: Scalability and Architechtural Patterns
 - Load balancing with cluster
 - Zero-downtime restart
 - Dealing with stateful communications
@@ -391,7 +393,25 @@ https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
 - Using a Service Registry
 
 
-375
+# Chapter 8: Messaging and Integration Patterns
+
+## Using Kafka-Node to build a chat application https://github.com/SOHU-Co/kafka-node
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
