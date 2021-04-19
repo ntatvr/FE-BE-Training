@@ -17,8 +17,7 @@ async function findById(userId) {
 }
 
 exports.findByUsername = async (username) => {
-	const query  = User.where({ username: username});
-	return await User.findOne(query).catch(e => {
+	return await User.findOne({ username: username}).catch(e => {
 		throw Boom.badRequest(e.message);
 	});
 }
@@ -34,6 +33,9 @@ exports.find = async () => {
 }
 
 exports.save = async (userId, payload) => {
+	if (!payload) {
+        throw Boom.badRequest(UsersErrors.BODY_IS_MISSING);
+	}
 
 	var userData = new User();
 	if (userId) {

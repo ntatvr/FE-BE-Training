@@ -1,7 +1,7 @@
 'use strict';
 const Joi = require('joi');
-const userController =  require('./src/auth/userController');
-const userScheme = require('./src/auth/userScheme');
+const userController =  require('./components/auth/userController');
+const userScheme = require('./components/auth/userScheme');
 
 function failAction(request, h, error) {
 	const errors = {};
@@ -22,41 +22,18 @@ module.exports = [
 		path: '/token',
 		handler: userController.getToken,
 		options: {
-            auth: 'basic',
-            description: 'Get Token',
-	        notes: 'Returns a token',
-	        tags: ['api'],
+            auth: 'basic'
         }
 	},
 	{
 		method: 'GET',
 		path: '/users',
-		handler: userController.find,
-		options: {
-            auth: {
-				mode: 'required',
-            	strategy: 'token',
-            	scope: ['+admin']
-            },
-            description: 'Get all users',
-	        notes: 'Returns all users',
-	        tags: ['api'],
-        }
+		handler: userController.find
 	},
 	{
 		method: 'GET',
 		path: '/users/{id}',
-		handler: userController.findById,
-		options: {
-            auth: {
-				mode: 'required',
-            	strategy: 'token',
-            	scope: ['+admin']
-            },
-            description: 'Get user by id',
-	        notes: 'Returns the user',
-	        tags: ['api'],
-        }
+		handler: userController.findById
 	},
 	{	
 		options: {

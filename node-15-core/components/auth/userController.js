@@ -1,6 +1,7 @@
 const userService =  require('./userService');
 const jwt = require('jsonwebtoken');
 const secret = require('../../config/secret');
+const Boom = require('@hapi/boom');
 
 exports.getToken = async (request, h) => {
 	return h.response({
@@ -24,4 +25,13 @@ exports.save = async (request, h) => {
 
 exports.delete = async (request, h) => {
 	return await userService.delete(request.params.id);
+}
+
+exports.verifyUniqueUser = async (request, h) => {
+	const user = await userService.findByUsername(request.payload.username);
+	if (user) {
+		throw Boom.badRequest('Username is duplicated');
+	}
+
+	return h.continue;
 }
