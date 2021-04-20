@@ -6,7 +6,7 @@ const manifest = {
     	host: settings.host,
         port: settings.port,
         app: {
-            title: 'Auth'
+            title: 'Core'
         }
     }
 }

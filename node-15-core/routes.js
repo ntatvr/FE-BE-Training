@@ -1,7 +1,9 @@
 'use strict';
 const Joi = require('joi');
-const userController =  require('./components/auth/userController');
-const userScheme = require('./components/auth/userScheme');
+const taskController =  require('./src/core/taskController');
+const taskScheme = require('./src/core/taskScheme');
+const authService = require('./src/auth/authService');
+const Boom = require('@hapi/boom');
 
 function failAction(request, h, error) {
 	const errors = {};
@@ -19,42 +21,64 @@ function failAction(request, h, error) {
 module.exports = [
 	{
 		method: 'GET',
-		path: '/token',
-		handler: userController.getToken,
+		path: '/tasks',
+		handler: taskController.find,
 		options: {
-            auth: 'basic'
+            auth: {
+				mode: 'required',
+            	strategy: 'token',
+            	scope: ['admin', 'user']
+            },
+            description: 'Get All Tasks',
+	        notes: 'Returns list of tasks',
+	        tags: ['api', 'task']
         }
 	},
 	{
 		method: 'GET',
-		path: '/users',
-		handler: userController.find
-	},
-	{
-		method: 'GET',
-		path: '/users/{id}',
-		handler: userController.findById
+		path: '/tasks/{id}',
+		handler: taskController.findById,
+		options: {
+            auth: {
+				mode: 'required',
+            	strategy: 'token',
+            	scope: ['admin', 'user']
+            },
+            description: 'Get task by id',
+	        notes: 'Returns the task',
+	        tags: ['api', 'task']
+        }
 	},
 	{	
 		options: {
 			auth: {
 				mode: 'required',
             	strategy: 'token',
-            	scope: ['+admin']
+            	scope: ['admin', 'user']
             },
 			validate: {
-				payload: userScheme,
+				payload: taskScheme,
 				options: {
 					abortEarly: false
 				},
 				failAction : failAction
 			},
 			pre: [
-				{ method: userController.verifyUniqueUser }
+				{ method: taskController.verifyUniqueTitle },
+				{ 
+					method: async function(request, h) {
+						const auth = request.auth;
+						const isValidUserId = await authService.isValidUserId(request.payload.assignee, auth.token);
+						if (isValidUserId) {
+							return h.continue;
+						}
+						throw Boom.badRequest('Assignee is invalid');
+					} 
+				}
 			]
 		},
 		method: ['POST', 'PUT'],
-		path: '/users/{id?}',
-		handler: userController.save
+		path: '/tasks/{id?}',
+		handler: taskController.save
 	}
 ];

@@ -1,7 +1,9 @@
 # TODO List project
 
 ## Start server
+```
 npm start
+```
 
 ## Run unit test
 ```
@@ -13,7 +15,7 @@ npm test
 npm test coverage
 ```
 
-Then, check test result in /coverage/index.html
+Then, check test result in "/coverage/index.html"
 
 ## Auth API Document
 ```

@@ -10,7 +10,8 @@ exports.getToken = async (request, h) => {
 }
 
 exports.find = async (request, h) => {
-	return await userService.find();
+	const users = await userService.find();
+	return {users: users};
 }
 
 exports.findById = async (request, h) => {

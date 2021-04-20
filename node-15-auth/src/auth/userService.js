@@ -23,7 +23,7 @@ exports.findByUsername = async (username) => {
 }
 
 exports.findById = async (userId) => {
-	return findById(userId);
+	return await findById(userId);
 }
 
 exports.find = async () => {

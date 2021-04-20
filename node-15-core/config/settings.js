@@ -4,9 +4,9 @@ const { env } = process;
 const settings = {
   'port': {
     $filter: 'env',
-    $default: 3000,
-    local: 3000,
-    production: 3001,
+    $default: 4000,
+    local: 4000,
+    production: 4001,
   },
   'host': {
     $filter: 'env',
@@ -16,9 +16,9 @@ const settings = {
   },
   'mongoDBUrl': {
     $filter: 'env',
-    $default: 'mongodb://localhost:30001/auth',
-    local: 'mongodb://localhost:30001/auth',
-    production: 'mongodb://127.0.0.1:30001/auth',
+    $default: 'mongodb://localhost:30001/core',
+    local: 'mongodb://localhost:30001/core',
+    production: 'mongodb://127.0.0.1:30001/core',
   },
 }
 const store = new Store(settings);

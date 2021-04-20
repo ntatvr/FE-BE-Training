@@ -2,7 +2,7 @@
   "name": "auth",
   "version": "1.0.0",
   "description": "User Management",
-  "main": "server.js",
+  "main": "app.js",
   "author": "NTATVR",
   "private": true,
   "scripts": {
