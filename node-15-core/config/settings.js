@@ -26,6 +26,12 @@ const settings = {
     local: 'info',
     production: 'error',
   },
+  'authAPI': {
+    $filter: 'env',
+    $default: 'http://localhost:3000',
+    local: 'http://localhost:3000',
+    production: 'http://localhost:3001',
+  }
 }
 const store = new Store(settings);
 
