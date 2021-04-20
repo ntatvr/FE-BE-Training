@@ -9,6 +9,15 @@ const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('./package');
 const authService = require('./src/auth/authService');
+const logger = require('./config/logger');
+const laabr = require('laabr');
+const fs = require('fs');
+
+const laabrOptions = {
+    formats: { onPostStart: ':time :start :level :message' },
+    tokens: { start:  () => '[start]' },
+    indent: 0
+};
 
 const validateToken = async function (credentials, request, h) {
 
@@ -32,6 +41,21 @@ const init = async () => {
             ignoreExpiration: true,    // do not reject expired tokens
             algorithms: [ 'HS256' ]    // specify your secure algorithm
         }
+    });
+
+    await server.register({
+        plugin: laabr,
+        options: laabrOptions,
+    });
+
+    server.events.on('response', function (request) {
+        logger.info(request.info.remoteAddress 
+            + ': ' 
+            + request.method.toUpperCase() 
+            + ' ' 
+            + request.path 
+            + ' --> ' 
+            + request.response.statusCode);
     });
 
     server.route(require('./routes'));
@@ -61,8 +85,31 @@ exports.start = async () => {
         }
     ]);
 
+
+    server.ext('onPreResponse', (request, h) => {
+        const response = request.response;
+        if (response.isBoom && response.output.payload.statusCode === 500) {
+            const output = response.output;
+            const errorObject = {
+                error: output.payload.error,
+                statusCode: output.payload.statusCode,
+                message: output.payload.message,
+                details: response.details,
+            }
+
+            return h.response(errorObject).code(output.statusCode).takeover();
+        }
+
+        return h.continue;
+    });
+
 	await server.start();
+
+    await fs.writeFile('log/app.log', '', function() {});
+    await fs.writeFile('log/error.log', '', function() {});
+
     console.log('Server running on %s', server.info.uri);
+    logger.info('Server running on %s', server.info.uri);
     return server;
 }
 
@@ -70,3 +117,8 @@ process.on('unhandledRejection', (err) => {
     console.log("[unhandledRejection] " + err);
     process.exit(1);
 });
+
+process.on('uncaughtException', function(err) {
+  console.log('Caught exception: ' + err);
+});
+

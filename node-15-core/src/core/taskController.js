@@ -2,8 +2,12 @@ const taskService =  require('./taskService');
 const Boom = require('@hapi/boom');
 
 exports.find = async (request, h) => {
-	const tasks = await taskService.find();
-	return {tasks: tasks};
+	const pageOptions = {
+	    page: parseInt(request.query.page, 10) - 1 || 0,
+	    size: parseInt(request.query.size, 10) || 2
+	}
+	const response = await taskService.find(request.auth.credentials.id, pageOptions);
+	return response;
 }
 
 exports.findById = async (request, h) => {

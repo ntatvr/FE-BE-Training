@@ -5,7 +5,7 @@ const Boom = require('@hapi/boom');
 
 exports.getToken = async (request, h) => {
 	return h.response({
-		token: jwt.sign(request.auth.credentials, secret, { algorithm: 'HS256'} )
+		token: jwt.sign(request.auth.credentials, secret, { algorithm: 'HS256', expiresIn: '1d'} )
 	}).code(200);
 }
 

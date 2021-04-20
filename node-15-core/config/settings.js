@@ -20,6 +20,12 @@ const settings = {
     local: 'mongodb://localhost:30001/core',
     production: 'mongodb://127.0.0.1:30001/core',
   },
+  'logLevel': {
+    $filter: 'env',
+    $default: 'error',
+    local: 'info',
+    production: 'error',
+  },
 }
 const store = new Store(settings);
 

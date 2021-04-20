@@ -20,10 +20,28 @@ exports.findById = async (taskId) => {
 	return await findById(taskId);
 }
 
-exports.find = async () => {
-	return await Task.find({}).catch(e => {
-		throw Boom.badRequest(e.message);
-	});
+exports.find = async (userId, pageOptions) => {
+
+	const tasks = await Task.find({ $or: [{reporter: userId}, {assignee: userId}]})
+		.skip(pageOptions.page * pageOptions.size)
+		.limit(pageOptions.size)
+		.select('-__v')
+		.catch((err) => {throw Boom.badRequest(err.message)}
+	);
+
+	const total = await Task.find({ $or: [{reporter: userId}, {assignee: userId}]})
+		.countDocuments()
+		.catch((err) => {throw Boom.badRequest(err.message)}
+	);
+	console.log(total);
+	
+	return {
+		data: tasks,
+		total: total,
+		page: pageOptions.page + 1,
+		size: pageOptions.size,
+		hasMore: (total > tasks.length + (pageOptions.page * pageOptions.size))
+	};
 }
 
 exports.save = async (taskId, reporter, payload) => {
@@ -34,6 +52,10 @@ exports.save = async (taskId, reporter, payload) => {
 	var taskData = new Task();
 	if (taskId) {
 		taskData = await findById(taskId);
+
+		if (taskData.reporter !== reporter) {
+			throw Boom.forbidden(TaskErrors.FORBIDDEN);
+		}
 	}
 
 	taskData.title = payload.title;

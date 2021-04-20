@@ -75,6 +75,24 @@ exports.start = async () => {
         }
     ]);
 
+    server.ext('onPreResponse', (request, h) => {
+        const response = request.response;
+        if (response.isBoom && response.output.payload.statusCode === 500) {
+            const output = response.output;
+            const errorObject = {
+                error: output.payload.error,
+                statusCode: output.payload.statusCode,
+                message: output.payload.message,
+                internalMessage:"Custom 500 error",
+            }
+            console.log(errorObject);
+
+            return h.response(errorObject).code(output.statusCode).takeover();
+        }
+
+        return h.continue;
+    });
+
 	await server.start();
     console.log('Server running on %s', server.info.uri);
     return server;

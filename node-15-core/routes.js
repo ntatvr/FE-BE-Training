@@ -1,7 +1,7 @@
 'use strict';
 const Joi = require('joi');
 const taskController =  require('./src/core/taskController');
-const taskScheme = require('./src/core/taskScheme');
+const {taskRequestSchema, taskResponseSchema, tasksResponseSchema} = require('./src/core/taskScheme');
 const authService = require('./src/auth/authService');
 const Boom = require('@hapi/boom');
 
@@ -24,6 +24,19 @@ module.exports = [
 		path: '/tasks',
 		handler: taskController.find,
 		options: {
+			validate: {
+				query: Joi.object({
+			        page: Joi.number().default(1).optional(),
+			        size: Joi.number().default(10).optional()
+			    }),
+	            headers: Joi.object({
+	                'authorization': Joi.string().required()
+	            }).unknown(),
+	            options: {
+			        allowUnknown: true
+			    },
+	            failAction : failAction,
+	        },
             auth: {
 				mode: 'required',
             	strategy: 'token',
@@ -31,7 +44,13 @@ module.exports = [
             },
             description: 'Get All Tasks',
 	        notes: 'Returns list of tasks',
-	        tags: ['api', 'task']
+	        tags: ['api', 'task'],
+	        response: {
+	        	status: {
+	        		200: tasksResponseSchema,
+	        		400: Joi.any()
+	        	}
+	        }
         }
 	},
 	{
@@ -39,6 +58,12 @@ module.exports = [
 		path: '/tasks/{id}',
 		handler: taskController.findById,
 		options: {
+			validate: {
+	            headers: Joi.object({
+	                'authorization': Joi.string().required()
+	            }).unknown(),
+	            failAction : failAction,
+	        },
             auth: {
 				mode: 'required',
             	strategy: 'token',
@@ -57,11 +82,14 @@ module.exports = [
             	scope: ['admin', 'user']
             },
 			validate: {
-				payload: taskScheme,
+				payload: taskRequestSchema,
 				options: {
 					abortEarly: false
 				},
-				failAction : failAction
+				headers: Joi.object({
+	                'authorization': Joi.string().required()
+	            }).unknown(),
+	            failAction : failAction,
 			},
 			pre: [
 				{ method: taskController.verifyUniqueTitle },
@@ -75,7 +103,11 @@ module.exports = [
 						throw Boom.badRequest('Assignee is invalid');
 					} 
 				}
-			]
+			],
+			description: 'Create/Update Task',
+	        notes: 'Create/Update Task',
+	        tags: ['api', 'task'],
+	        response: {schema: taskResponseSchema}
 		},
 		method: ['POST', 'PUT'],
 		path: '/tasks/{id?}',
