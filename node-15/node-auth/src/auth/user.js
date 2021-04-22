@@ -11,9 +11,9 @@ const userModel = new Schema({
 
 // Hide properties of Mongoose objects in Node.JS JSON responses
 userModel.methods.toJSON = function() {
- var obj = this.toObject();
- delete obj.password;
- return obj;
+ 	var obj = this.toObject();
+ 	delete obj.password;
+ 	return obj;
 }
 
 module.exports = mongoose.model('User', userModel, 'users');

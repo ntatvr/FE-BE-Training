@@ -1,0 +1,59 @@
+<div class="row" id="formErrors">
+	<div class="col-sm-10 col-sm-offset-2">
+		{{!-- Error summary goes here --}}
+		{{#each errors}}
+			<p class="text-danger">{{this}}</p>
+		{{/each}}
+	</div>
+</div>
+
+<div>
+	<form action="/tasks" class="form-horizontal" method="post">
+		<div class="form-group" >
+			<label class="col-sm-2 control-label">Title</label>
+			<div class="col-sm-10">
+				<input type="text" name="title" class="form-control {{#if errors.title}}is-invalid{{/if}}" value="{{values.title}}">
+			</div>
+		</div>
+		<div class="form-group" >
+			<label class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-10">
+				<textarea  name="description" rows="3" class="form-control {{#if errors.description}}is-invalid{{/if}}" value="{{values.description}}"></textarea>
+			</div>
+		</div>
+		<div class="form-group" >
+			<label class="col-sm-2 control-label">Reporter</label>
+			<div class="col-sm-10">
+				<input type="text" disabled="true" class="form-control" value="{{values.title}}">
+			</div>
+		</div>
+		<div class="form-group">
+	    	<label class="col-sm-2 control-label" for="assignee">Assignee</label>
+	    	<div class="col-sm-10">
+		    	<select class="form-control" id="assignee">
+			      	<option>607cf900ff926409586d2e4f</option>
+			      	<option>607cf900ff926409586d2e4f</option>
+			      	<option>607cf900ff926409586d2e4f</option>
+			      	<option>607cf900ff926409586d2e4f</option>
+			      	<option>607cf900ff926409586d2e4f</option>
+		    	</select>
+		    </div>
+	 	</div>
+	 	<div class="form-group">
+	    	<label class="col-sm-2 control-label" for="status">Status</label>
+	    	<div class="col-sm-10">
+		    	<select class="form-control" id="status">
+			      	<option>Open</option>
+			      	<option>In-progress</option>
+			      	<option>Done</option>
+			      	<option>Closed</option>
+		    	</select>
+	    	</div>
+	 	</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-default" type="submit">Submit</button>
+			</div>
+		</div>
+	</form>
+</div>

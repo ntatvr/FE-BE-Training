@@ -29,10 +29,6 @@ module.exports = [
 		method: 'GET',
         path: '/upload',
         handler: function(request, h) {
-        	console.info("info");
-		    console.error("error");
-		    console.warn("warn");
-		    console.log("log");
         	return h.view('upload');
         }
     },

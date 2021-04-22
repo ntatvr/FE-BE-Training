@@ -3,12 +3,10 @@ require('dotenv').config();
 const Hapi = require('@hapi/hapi');
 const Glue = require('@hapi/glue');
 const Manifest = require('./config/manifest');
-const secret = require('./config/secret');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('./package');
-const authService = require('./src/auth/authService');
 const logger = require('./config/logger');
 const laabr = require('laabr');
 const fs = require('fs');
@@ -19,28 +17,50 @@ const laabrOptions = {
     indent: 0
 };
 
-const validateToken = async function (credentials, request, h) {
+const context = {
+    title: 'Web Service'
+};
 
-    const isValidUserId = await authService.isValidUserId(credentials.id, request.auth.token);
-
-    if (isValidUserId) {
-        return { isValid: true };
+const validateSession = async (request, session) => {
+    if (session.token) {
+        return { valid: true };
     }
-
-    return { isValid: false };
+    return { valid: false };
 };
 
 const init = async () => {
     const server = await Glue.compose(Manifest, {relativeTo: __dirname});
 
-    await server.register(require('hapi-auth-jwt2'));
-    server.auth.strategy('token', 'jwt', {
-        key: secret,
-        validate: validateToken,
-        verifyOptions: {
-            ignoreExpiration: true,    // do not reject expired tokens
-            algorithms: [ 'HS256' ]    // specify your secure algorithm
+    await server.register(require('@hapi/cookie'));
+    server.auth.strategy('session', 'cookie', 
+        {
+            cookie: {
+                name: 'token',
+                password: 'BbZJjyoXAdr8BUZuiKKARWimKfrSmQ6fv8kZ7OFfc',
+                isSecure: false,
+                ttl: 60 * 1000,
+            },
+            redirectTo: '/login',
+            validateFunc: validateSession
         }
+    );
+    server.auth.default('session');
+
+    let hbs = require('handlebars');
+    hbs.registerHelper("inc", function(value, options) {
+        return parseInt(value) + 1;
+    });
+
+    await server.register(require('@hapi/vision'));
+    server.views({
+        engines: {
+            hbs: hbs
+        },
+        context,
+        relativeTo: __dirname,
+        path: 'templates',
+        layout: true,
+        layoutPath: 'templates/layout'
     });
 
     await server.register({
@@ -71,7 +91,7 @@ exports.start = async () => {
 
     const swaggerOptions = {
         info: {
-            title: 'Core API Documentation',
+            title: 'Web API Documentation',
             version: Pack.version,
         },
     };
@@ -114,6 +134,7 @@ exports.start = async () => {
 }
 
 process.on('unhandledRejection', (err) => {
+    console.log(err);
     console.log("[unhandledRejection] " + err);
     process.exit(1);
 });
