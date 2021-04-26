@@ -2,6 +2,7 @@
 const Joi = require('joi');
 const Boom = require('@hapi/boom');
 const authController =  require('./src/auth/authController');
+const taskController =  require('./src/core/taskController');
 
 function failAction(request, h, error) {
 	const errors = {};
@@ -37,15 +38,17 @@ module.exports = [
                 mode: 'required'
             }
         },
-        handler: function(request, h) {
-            if (!request.auth.isAuthenticated) {
-                return h.redirect('/login');
+        handler: taskController.getTasks
+    },
+    {
+        method: 'POST',
+        path: '/tasks',
+        options: {
+            auth: {
+                mode: 'required'
             }
-
-        	return h.view('tasks', {
-        		pageHeader: 'Create Task'
-        	});
-        }
+        },
+        handler: taskController.createTask
     },
     {
 		method: 'GET',

@@ -7,7 +7,7 @@
 	</div>
 </div>
 
-<div>
+<div class="col-sm-12">
 	<form action="/tasks" class="form-horizontal" method="post">
 		<div class="form-group" >
 			<label class="col-sm-2 control-label">Title</label>
@@ -24,25 +24,23 @@
 		<div class="form-group" >
 			<label class="col-sm-2 control-label">Reporter</label>
 			<div class="col-sm-10">
-				<input type="text" disabled="true" class="form-control" value="{{values.title}}">
+				<input type="text" disabled="true" name="reporter" class="form-control" value="{{values.reporter}}">
 			</div>
 		</div>
 		<div class="form-group">
 	    	<label class="col-sm-2 control-label" for="assignee">Assignee</label>
 	    	<div class="col-sm-10">
-		    	<select class="form-control" id="assignee">
-			      	<option>607cf900ff926409586d2e4f</option>
-			      	<option>607cf900ff926409586d2e4f</option>
-			      	<option>607cf900ff926409586d2e4f</option>
-			      	<option>607cf900ff926409586d2e4f</option>
-			      	<option>607cf900ff926409586d2e4f</option>
+		    	<select class="form-control" name="assignee" id="assignee">
+			      	{{#each users}}
+			      		<option value="{{this._id}}">{{this._id}}</option>
+			      	{{/each}}
 		    	</select>
 		    </div>
 	 	</div>
 	 	<div class="form-group">
 	    	<label class="col-sm-2 control-label" for="status">Status</label>
 	    	<div class="col-sm-10">
-		    	<select class="form-control" id="status">
+		    	<select class="form-control" name="status" id="status">
 			      	<option>Open</option>
 			      	<option>In-progress</option>
 			      	<option>Done</option>
@@ -50,10 +48,36 @@
 		    	</select>
 	    	</div>
 	 	</div>
+	 	<input type="hidden" name="users" value="{{json users}}">
+	 	<input type="hidden" name="tasks" value="{{json tasks}}">
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button class="btn btn-default" type="submit">Submit</button>
 			</div>
 		</div>
 	</form>
+</div>
+<hr/>
+<div class="col-sm-12">
+	<h1>Tasks</h1>
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">Title</th>
+	      <th scope="col">Reporter</th>
+	      <th scope="col">Assignee</th>
+	      <th scope="col">Status</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	{{#each tasks}}
+		    <tr>
+		      <th scope="row">{{this.title}}</th>
+		      <td>{{this.reporter}}</td>
+		      <td>{{this.assignee}}</td>
+		      <td>{{this.status}}</td>
+		    </tr>
+	    {{/each}}
+	  </tbody>
+	</table>
 </div>

@@ -19,6 +19,20 @@ exports.getUserToken = async (username, password) => {
     return {status: status, data: data};
 }
 
+exports.getUsers = async (credentials) => {
+
+    const response  = await fetch(settings.authAPI + '/users', {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.token
+        }
+    }).catch((err) => {throw Boom.serverUnavailable('Auth Service is unavailable.')});
+    const status = await response.status;
+    const data = await response.json();
+    return {status: status, data: data};
+}
+
 exports.isValidUserId = async (userId, token) => {
 	const url = settings.authAPI + '/users/' + userId;
 	const res = await fetch(url, {

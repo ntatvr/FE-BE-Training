@@ -36,7 +36,7 @@ module.exports = [
             auth: {
 				mode: 'required',
             	strategy: 'token',
-            	scope: ['+admin']
+            	scope: ['admin', 'user']
             },
             description: 'Get all users',
 	        notes: 'Returns all users',

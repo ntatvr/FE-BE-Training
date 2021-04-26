@@ -38,7 +38,7 @@ const init = async () => {
                 name: 'token',
                 password: 'BbZJjyoXAdr8BUZuiKKARWimKfrSmQ6fv8kZ7OFfc',
                 isSecure: false,
-                ttl: 60 * 1000,
+                ttl: 600 * 1000,
             },
             redirectTo: '/login',
             validateFunc: validateSession
@@ -50,6 +50,9 @@ const init = async () => {
     hbs.registerHelper("inc", function(value, options) {
         return parseInt(value) + 1;
     });
+    hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
 
     await server.register(require('@hapi/vision'));
     server.views({

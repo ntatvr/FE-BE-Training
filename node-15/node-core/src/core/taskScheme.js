@@ -7,7 +7,7 @@ const taskRequestSchema = Joi.object({
 	//reporter: Joi.string().required(),
 	assignee: Joi.string().required(),
 	status: Joi.string().valid('Open', 'In-progress', 'Done', 'Closed')
-});
+}).unknown();
 
 const taskResponseSchema = Joi.object({
 	title: Joi.string(),
