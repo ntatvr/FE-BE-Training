@@ -16,7 +16,7 @@
     "accept": "^2.1.4",
     "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
-    "got": "^11.8.2",
+    "got": "^11.8.5",
     "handlebars": "^4.7.7",
     "hapi-auth-basic": "^5.0.0",
     "hapi-auth-jwt": "^4.0.0",
