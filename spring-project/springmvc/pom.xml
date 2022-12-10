@@ -10,7 +10,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
-		<spring.version>5.1.0.RELEASE</spring.version>
+		<spring.version>6.0.0</spring.version>
 		<spring.security.version>5.1.4.RELEASE</spring.security.version>
 		<jdk.version>1.8</jdk.version>
 		<hibernate.version>5.2.12.Final</hibernate.version>
